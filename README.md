@@ -6,7 +6,7 @@ Projeto criado como requisito para completar o módulo **#3 - Programação Orie
 ### 🎯 Objetivo:
 Construir uma aplicação para gerenciar o aluguel de veículos.
 
-### ⚠️ Requisitos:
+### ⚙️ Requisitos:
 
 - [ ]  Cadastrar veículos
 - [ ]  Alterar um veículo cadastrado
@@ -25,8 +25,8 @@ Construir uma aplicação para gerenciar o aluguel de veículos.
 
 ### 🔝 Extras (opcionais):
 
-- [ ]  Paginar as listas envolvidas;
-- [ ]  Dados sendo gravados em arquivos, simulando uma base de dados;
+- [ ]  Paginação nas listas;
+- [ ]  Persistência de dados em arquivos para simular uma base de dados.
 
 ### 👔 Regras de negócio:
 
@@ -37,10 +37,10 @@ Construir uma aplicação para gerenciar o aluguel de veículos.
  5. Agências não podem estar duplicadas;
  6. Clientes não podem estar duplicados;
  7. Regras de devolução:
-* Caso pessoa fisica tenha ficado com o carro mais que 5 dias terá direito a 5% de desconto.
-* Caso pessoa juridica tenha ficado com o carro mais que 3 dias terá direito a 10% de desconto.
+    * Pessoa Física: 5% de desconto para locações acima de 5 dias.
+    * Pessoa Jurídica: 10% de desconto para locações acima de 3 dias.
 
-#### 💰 Diária por tipo de veículo:
+### 💰 Diária por tipo de veículo:
 
 | Tipo de Veículo   | Valor por Dia |
 | :--------: | :-------: |
