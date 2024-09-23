@@ -4,27 +4,27 @@ import ada.tech.localizada.model.Agencia;
 
 import java.util.ArrayList;
 
-public class AgenciaService {
+public class AgenciaService implements Service<Agencia>{
     ArrayList<Agencia>agencia = new ArrayList<>();
 
-    // metodos para agencia
-    public void criarAgencia(){
+
+    @Override
+    public void criar(Agencia agencia) {
+// ToDO
+    }
+
+    @Override
+    public Agencia buscar(String nome) {
+        return null;
+    }
+
+    @Override
+    public void editar(String cnpj) {
 
     }
 
-    public Agencia buscarAgenciaNome(String nome){
-        // for para buscar na lista agencia o atributo nome e retornar
-        return null ;
-    }
-
-    public void editarAgencia(String cnpj){
+    @Override
+    public void excluir(String cnpj) {
 
     }
-
-    public void excluirAgencia(String cnpj){
-
-    }
-
-
-
 }
