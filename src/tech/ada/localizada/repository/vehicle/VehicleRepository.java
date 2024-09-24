@@ -1,6 +1,8 @@
 package tech.ada.localizada.repository.vehicle;
 
-public interface VehicleRepository {
+import tech.ada.localizada.model.Vehicle;
+import tech.ada.localizada.repository.Repository;
 
+public interface VehicleRepository extends Repository <Vehicle, Integer> {
 
 }
