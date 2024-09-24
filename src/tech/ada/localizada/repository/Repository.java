@@ -1,4 +1,4 @@
-package ada.tech.localizada.repository;
+package tech.ada.localizada.repository;
 
 import java.util.List;
 import java.util.Optional;
