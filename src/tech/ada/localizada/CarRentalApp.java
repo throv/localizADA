@@ -16,8 +16,8 @@ public class CarRentalApp {
 
         ClientRepository clientRepository = new ClientRepositoryImpl();
         ClientService clientService = new ClientServiceImpl(clientRepository);
-        Client newClient = new Client("Pedro", "pedro@teste.com");
-        clientService.saveClient(newClient);
+        //Client newClient = new Client("Pedro", "pedro@teste.com");
+        //clientService.saveClient(newClient);
 
         CompanyRepository companyRepository = new CompanyRepositoryImpl();
         CompanyService companyService = new CompanyServiceImpl(companyRepository);

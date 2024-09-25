@@ -5,10 +5,9 @@ import tech.ada.localizada.repository.Repository;
 
 import java.util.List;
 
-public interface ClientRepository extends Repository<Client, Integer> {
+public interface ClientRepository extends Repository<Client, String> {
 
-    //ADICIONAR MÉTODOS ESPECÍFICOS DE CLIENTE
-    //EXEMPLO: BUSCAR POR NOME
+
     List<Client> findByName(String name);
 
 }
