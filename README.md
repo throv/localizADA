@@ -10,7 +10,7 @@ Construir uma aplicação para gerenciar o aluguel de veículos.
 
 - [ ]  Cadastrar veículos
 - [ ]  Alterar um veículo cadastrado
-- [ ]  Buscar um veículo por parte do nome;
+- [ ]  Buscar um veículo por placa;
 - [ ]  Cadastrar a agência onde o veículo será alugado/devolvido;
 - [ ]  Alterar a agência onde o veículo será alugado/devolvido;
 - [ ]  Buscar uma agência por parte do nome ou do logradouro do endereço;
