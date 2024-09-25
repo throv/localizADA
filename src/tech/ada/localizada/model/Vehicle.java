@@ -5,11 +5,13 @@ package tech.ada.localizada.model;
         private int id;
         private String model;
         private int year;
+        private String plate;
 
-        public Vehicle(int id, String model, int year) {
+        public Vehicle(int id, String model, int year, String plate) {
             this.id = id;
             this.model = model;
             this.year = year;
+            this.plate = plate;
         }
 
         public int getId() {
@@ -36,6 +38,13 @@ package tech.ada.localizada.model;
             this.year = year;
         }
 
-}
+        public String getPlate() {
+            return plate;
+        }
+
+        public void setPlate(String plate) {
+            this.plate = plate;
+        }
+    }
 
 

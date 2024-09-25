@@ -26,6 +26,5 @@ public class CarRentalApp {
 
         Company company2 = new Company("Santander", "Avenida dos Ovos", "Fortaleza", "823199123994");
         companyService.addCompany(company2);
-
     }
 }
