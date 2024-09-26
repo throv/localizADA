@@ -13,20 +13,9 @@ public class ClientRepositoryImpl extends RepositoryImpl<Client, String> impleme
 
     @Override
     protected List<Client> getList() {
-        return List.of();
+        return clientDb;
     }
 
-    @Override
-    public Client save(Client client) {
-
-            Optional<Client> existingClient = findById(client.getId());
-            if(existingClient.isPresent()) {
-                clientDb.remove(existingClient.get());
-            }
-
-        clientDb.add(client);
-        return client;
-    }
 
     @Override
     protected String getId(Client client) {

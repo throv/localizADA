@@ -4,6 +4,7 @@ import tech.ada.localizada.model.Client;
 import tech.ada.localizada.repository.client.ClientRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public class ClientServiceImpl implements ClientService {
@@ -16,26 +17,49 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client saveClient(Client client) {
+    public Client createClient(Client client) {
+
+        if (clientRepository.findById(client.getId()).isPresent()) {
+            throw new IllegalArgumentException("Client with ID " + client.getId() + " already exists.");
+        }
+        return clientRepository.save(client);
+    }
+
+    @Override
+    public Client updateClient(Client client) {
+
+        Optional<Client> existingClient = clientRepository.findById(client.getId());
+
+        if (existingClient.isEmpty()) {
+            throw new IllegalArgumentException("Client with ID " + client.getId() + " was not found.");
+        }
 
         return clientRepository.save(client);
     }
 
     @Override
-    public void deleteClient(int id) {
+    public void deleteClient(String id) {
+
+
+        if (clientRepository.findById(id).isEmpty()) {
+            throw new IllegalArgumentException("Client with ID " + id + " was not found.");
+        }
+
+
+        clientRepository.delete(id);
     }
 
     @Override
-    public Client getClientById(int id) {
-        return null;
+    public Client getClientById(String id) {
+        return clientRepository
+                .findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Client with ID " + id + "could not be found. No resources deleted."));
     }
 
     @Override
     public List<Client> listClients() {
-        return List.of();
+        return clientRepository.findAll();
     }
-
-    //MÉTODOS CRUD
 
 
 }
