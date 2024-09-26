@@ -6,33 +6,33 @@ import java.util.Optional;
 
 public abstract class RepositoryImpl<T, I> implements Repository<T, I>  {
 
-    protected List<T> entityList = new ArrayList<>();
+    protected abstract List<T> getList();
 
     @Override
     public T save(T entity) {
         Optional<T> existingEntity = findById(getId(entity));
         if(existingEntity.isPresent()) {
-            entityList.remove(existingEntity.get());
+            getList().remove(existingEntity.get());
         }
-        entityList.add(entity);
+        getList().add(entity);
         return entity;
     }
 
     @Override
     public Optional<T> findById(I id) {
-        return entityList.stream()
+        return getList().stream()
                 .filter(entity -> getId(entity).equals(id))
                 .findFirst();
     }
 
     @Override
     public List<T> findAll() {
-        return new ArrayList<>(entityList);
+        return new ArrayList<>(getList());
     }
 
     @Override
     public void delete(I id) {
-        entityList.removeIf(entity -> getId(entity).equals(id));
+        getList().removeIf(entity -> getId(entity).equals(id));
 
     }
 

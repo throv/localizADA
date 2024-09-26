@@ -12,6 +12,11 @@ public class ClientRepositoryImpl extends RepositoryImpl<Client, String> impleme
     private final List<Client> clientDb = new ArrayList<>();
 
     @Override
+    protected List<Client> getList() {
+        return List.of();
+    }
+
+    @Override
     public Client save(Client client) {
 
             Optional<Client> existingClient = findById(client.getId());

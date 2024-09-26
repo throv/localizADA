@@ -11,31 +11,16 @@ import java.util.Optional;
 public class VehicleRepositoryImpl extends RepositoryImpl
         <Vehicle, Integer> implements Repository <Vehicle, Integer> {
 
-    private final List<Vehicle> vehiclesDb = new ArrayList<>();
+    public final List<Vehicle> vehiclesDb = new ArrayList<>();
+
+    @Override
+    protected List<Vehicle> getList() {
+        return vehiclesDb;
+    }
 
     @Override
     protected Integer getId(Vehicle entity) {
         return entity.getId();
-    }
-
-    @Override
-    public Vehicle save(Vehicle entity) {
-        return super.save(entity);
-    }
-
-    @Override
-    public Optional<Vehicle> findById(Integer id) {
-        return super.findById(id);
-    }
-
-    @Override
-    public List<Vehicle> findAll() {
-        return super.findAll();
-    }
-
-    @Override
-    public void delete(Integer id) {
-        super.delete(id);
     }
 
     public Optional<Vehicle> findByPlate(String plate) {
@@ -43,5 +28,13 @@ public class VehicleRepositoryImpl extends RepositoryImpl
                 .filter(vehicle -> vehicle.getPlate().equalsIgnoreCase(plate))
                 .findFirst();
     }
+
+    public Optional<Integer> findIdByPlate (String plate) {
+        return vehiclesDb.stream()
+                .filter(vehicle -> vehicle.getPlate().equalsIgnoreCase(plate))
+                .map(Vehicle::getId)
+                .findFirst();
+    }
+
 
 }

@@ -60,6 +60,11 @@ public class CompanyRepositoryImpl extends RepositoryImpl<Company, Integer> impl
     }
 
     @Override
+    protected List<Company> getList() {
+        return List.of();
+    }
+
+    @Override
     protected Integer getId(Company entity) {
         return entity.getId();
     }

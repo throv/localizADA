@@ -17,6 +17,12 @@ public class VehicleCar extends Vehicle {
         this.numberOfDoors = numberOfDoors;
     }
 
+    @Override
+    public String toString() {
+        return "VehicleCar{" +
+                "numberOfDoors=" + numberOfDoors +
+                '}';
+    }
 }
 
 
