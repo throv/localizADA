@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public class CompanyRepositoryImpl extends RepositoryImpl<Company, Integer> implements CompanyRepository {
 
-    private final List<Company> companies = new ArrayList<>();
+    public final List<Company> companies = new ArrayList<>();
 
     @Override
     protected List<Company> getList() {

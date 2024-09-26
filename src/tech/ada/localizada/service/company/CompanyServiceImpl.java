@@ -27,15 +27,21 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Company updateCompany(Company company) {
-        Optional<Company> existingCompany = companyRepository.findById(company.getId());
+    public Company updateCompany(int id, Company company) {
+        Optional<Company> existingCompany = companyRepository.findById(id);
 
-        if (existingCompany.isPresent()) {
-            return companyRepository.save(company);
-        } else {
-            System.err.println("Company not found.");
-            return null;
+        if (existingCompany.isEmpty()) {
+            throw new IllegalArgumentException("Client with ID " + id + " was not found.");
         }
+
+        Company companyToUpdate = existingCompany.get();
+
+        companyToUpdate.setName(company.getName());
+        companyToUpdate.setCnpj(company.getCnpj());
+        companyToUpdate.setAddress(company.getAddress());
+        companyToUpdate.setCity(company.getCity());
+
+        return companyRepository.save(companyToUpdate);
     }
 
     @Override

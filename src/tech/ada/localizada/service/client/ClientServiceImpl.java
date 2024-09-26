@@ -26,15 +26,22 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client updateClient(Client client) {
+    public Client updateClient(String id, Client client) {
 
-        Optional<Client> existingClient = clientRepository.findById(client.getId());
+        Optional<Client> optionalClient = clientRepository.findById(id);
 
-        if (existingClient.isEmpty()) {
+        if (optionalClient.isEmpty()) {
             throw new IllegalArgumentException("Client with ID " + client.getId() + " was not found.");
         }
 
-        return clientRepository.save(client);
+        Client existingClient = optionalClient.get();
+
+        existingClient.setName(client.getName());
+        existingClient.setEmail(client.getEmail());
+        existingClient.setDocument(client.getId());
+
+
+        return clientRepository.save(existingClient);
     }
 
     @Override
