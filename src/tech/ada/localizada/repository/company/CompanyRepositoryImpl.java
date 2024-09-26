@@ -41,4 +41,5 @@ public class CompanyRepositoryImpl extends RepositoryImpl<Company, Integer> impl
     protected Integer getId(Company entity) {
         return entity.getId();
     }
+
 }
