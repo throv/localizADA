@@ -13,6 +13,7 @@ import tech.ada.localizada.service.client.ClientService;
 import tech.ada.localizada.service.client.ClientServiceImpl;
 import tech.ada.localizada.service.company.CompanyService;
 import tech.ada.localizada.service.company.CompanyServiceImpl;
+import tech.ada.localizada.view.Menu;
 
 public class CarRentalApp {
     public static void main(String[] args) {
@@ -28,7 +29,7 @@ public class CarRentalApp {
         companyService.addCompany(company1);
 
         Company company2 = new Company("Santander", "Avenida dos Ovos", "Fortaleza", "823199123994");
-        companyService.addCompany(company2);*/
+        companyService.addCompany(company2);
 
         VehicleRepositoryImpl vehicleRepository = new VehicleRepositoryImpl();
 
@@ -51,7 +52,10 @@ public class CarRentalApp {
         for (int i = 0; i < vehicleRepository.vehiclesDb.size(); i ++ ) {
             System.out.println("Numero de portas");
             System.out.println(vehicleRepository.vehiclesDb.get(i));
-        }
+        }*/
+
+        Menu menu = new Menu();
+        menu.startMenu();
 
     }
 }
