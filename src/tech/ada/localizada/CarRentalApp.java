@@ -17,10 +17,10 @@ import tech.ada.localizada.service.company.CompanyServiceImpl;
 public class CarRentalApp {
     public static void main(String[] args) {
 
-        ClientRepository clientRepository = new ClientRepositoryImpl();
+        /*ClientRepository clientRepository = new ClientRepositoryImpl();
         ClientService clientService = new ClientServiceImpl(clientRepository);
-        //Client newClient = new Client("Pedro", "pedro@teste.com");
-        //clientService.saveClient(newClient);
+        Client newClient = new Client("Pedro", "pedro@teste.com");
+        clientService.saveClient(newClient);
 
         CompanyRepository companyRepository = new CompanyRepositoryImpl();
         CompanyService companyService = new CompanyServiceImpl(companyRepository);
@@ -28,7 +28,7 @@ public class CarRentalApp {
         companyService.addCompany(company1);
 
         Company company2 = new Company("Santander", "Avenida dos Ovos", "Fortaleza", "823199123994");
-        companyService.addCompany(company2);
+        companyService.addCompany(company2);*/
 
         VehicleRepositoryImpl vehicleRepository = new VehicleRepositoryImpl();
 
