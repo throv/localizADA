@@ -2,6 +2,8 @@ package tech.ada.localizada.model;
 
 public class NaturalPerson extends Client{
 
+
+
     private String cpf;
     public NaturalPerson(String name, String email, String cpf) {
         super(name, email);
@@ -11,6 +13,11 @@ public class NaturalPerson extends Client{
     @Override
     public String getId() {
         return cpf;
+    }
+
+    @Override
+    public void setDocument(String document) {
+        this.cpf = document;
     }
 
     public String getCpf() {

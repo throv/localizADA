@@ -9,28 +9,11 @@ import java.util.Optional;
 
 public class CompanyRepositoryImpl extends RepositoryImpl<Company, Integer> implements CompanyRepository {
 
-    private final List<Company> companies = new ArrayList<>();
-    private int id = 1;
+    public final List<Company> companies = new ArrayList<>();
 
     @Override
-    public void addCompany(Company company) {
-        if (findCompanyByCNPJ(company.getCnpj()).isEmpty()) {
-            company.setId(id++);
-            companies.add(company);
-        } else {
-            System.err.println("There is already a company with this CNPJ.");
-        }
-    }
-
-    @Override
-    public void updateCompany(Company company) {
-        Optional<Company> existingCompany = findById(company.getId());
-        if (existingCompany.isPresent()) {
-            companies.remove(existingCompany.get());
-            companies.add(company);
-        } else {
-            System.err.println("Company not found.");
-        }
+    protected List<Company> getList() {
+        return companies;
     }
 
     @Override
@@ -55,17 +38,8 @@ public class CompanyRepositoryImpl extends RepositoryImpl<Company, Integer> impl
     }
 
     @Override
-    public List<Company> getAllCompanies() {
-        return new ArrayList<>(companies);
-    }
-
-    @Override
-    protected List<Company> getList() {
-        return List.of();
-    }
-
-    @Override
     protected Integer getId(Company entity) {
         return entity.getId();
     }
+
 }

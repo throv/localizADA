@@ -6,12 +6,17 @@ package tech.ada.localizada.model;
         private String model;
         private int year;
         private String plate;
+        private Company findVehicleAgency;
+        private boolean isVehicleRented;
 
-        public Vehicle(int id, String model, int year, String plate) {
-            this.id = id;
+        public Vehicle (String model, int year,
+                        String plate, Company findVehicleAgency, boolean isVehicleRented ) {
+
             this.model = model;
             this.year = year;
             this.plate = plate;
+            this.findVehicleAgency = findVehicleAgency;
+            this.isVehicleRented = isVehicleRented;
         }
 
         public int getId() {
@@ -44,6 +49,22 @@ package tech.ada.localizada.model;
 
         public void setPlate(String plate) {
             this.plate = plate;
+        }
+
+        public Company getFindVehicleAgency() {
+            return findVehicleAgency;
+        }
+
+        public void setFindVehicleAgency(Company findVehicleAgency) {
+            this.findVehicleAgency = findVehicleAgency;
+        }
+
+        public boolean isVehicleRented() {
+            return isVehicleRented;
+        }
+
+        public void setVehicleRented(boolean vehicleRented) {
+            isVehicleRented = vehicleRented;
         }
     }
 

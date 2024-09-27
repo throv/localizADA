@@ -14,14 +14,34 @@ public class CompanyServiceImpl implements CompanyService {
         this.companyRepository = companyRepository;
     }
 
+    private int id = 1;
+
     @Override
     public void addCompany(Company company) {
-        companyRepository.addCompany(company);
+        if (companyRepository.findCompanyByCNPJ(company.getCnpj()).isEmpty()) {
+            company.setId(id++);
+            companyRepository.save(company);
+        } else {
+            System.err.println("There is already a company with this CNPJ.");
+        }
     }
 
     @Override
-    public void updateCompany(Company company) {
-        companyRepository.updateCompany(company);
+    public Company updateCompany(int id, Company company) {
+        Optional<Company> existingCompany = companyRepository.findById(id);
+
+        if (existingCompany.isEmpty()) {
+            throw new IllegalArgumentException("Client with ID " + id + " was not found.");
+        }
+
+        Company companyToUpdate = existingCompany.get();
+
+        companyToUpdate.setName(company.getName());
+        companyToUpdate.setCnpj(company.getCnpj());
+        companyToUpdate.setAddress(company.getAddress());
+        companyToUpdate.setCity(company.getCity());
+
+        return companyRepository.save(companyToUpdate);
     }
 
     @Override
@@ -41,6 +61,6 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<Company> getAllCompanies() {
-        return companyRepository.getAllCompanies();
+        return companyRepository.findAll();
     }
 }

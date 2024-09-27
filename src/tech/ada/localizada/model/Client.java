@@ -3,7 +3,6 @@ package tech.ada.localizada.model;
 public abstract class Client {
     private String name;
     private String email;
-
     private Address address;
 
 
@@ -13,6 +12,7 @@ public abstract class Client {
     }
 
     public abstract String getId();
+    public abstract void setDocument(String document);
     public String getName() {
         return name;
     }
@@ -25,4 +25,5 @@ public abstract class Client {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }
