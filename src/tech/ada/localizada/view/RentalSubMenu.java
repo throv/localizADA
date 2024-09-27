@@ -1,13 +1,14 @@
 package tech.ada.localizada.view;
 
-import tech.ada.localizada.model.Company;
-import tech.ada.localizada.model.Vehicle;
-import tech.ada.localizada.model.VehicleCar;
+import tech.ada.localizada.model.*;
+import tech.ada.localizada.repository.client.ClientRepositoryImpl;
 import tech.ada.localizada.repository.company.CompanyRepositoryImpl;
 import tech.ada.localizada.repository.vehicle.VehicleRepositoryImpl;
 import tech.ada.localizada.service.rental.RentalService;
 import tech.ada.localizada.service.vehicle.VehicleServiceImpl;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -16,6 +17,8 @@ public class RentalSubMenu {
     private RentalService rentalService = new RentalService();
     static Scanner scanner = new Scanner(System.in);
     CompanyRepositoryImpl companyRepository = new CompanyRepositoryImpl();
+    VehicleRepositoryImpl vehicleRepository = new VehicleRepositoryImpl();
+    ClientRepositoryImpl clientRepository = new ClientRepositoryImpl();
 
     public RentalSubMenu(VehicleServiceImpl vehicleService) {
         this.rentalService = rentalService;
@@ -31,8 +34,8 @@ public class RentalSubMenu {
 
         do {
             System.out.println("Menu:");
-            System.out.println("1 - Rent Vehicle");
-            System.out.println("2 - Exit");
+            System.out.println("1 - Alugar Veículo");
+            System.out.println("2 - Sair");
             System.out.print("Escolha uma opção: ");
 
             option = scanner.nextInt();
@@ -55,17 +58,20 @@ public class RentalSubMenu {
 
     public void createRentalSubMenu() {
 
-        System.out.print("Enter de Custumer's name: ");
-        String model = scanner.nextLine();
+        System.out.print("Cliente que irá alugar Veículo: ");
+        List<Client> clientDb = clientRepository.findAll();
+        System.out.println(clientDb);
+        int clientIndex = Integer.parseInt(scanner.nextLine());
+        Client client = clientDb.get(clientIndex + 1);
 
-        System.out.print("Enter the vehicle you wish to rent: ");
+        System.out.print("Digite o número identificador do veículo que será alugado: ");
         List<Vehicle> vehiclesDb = vehicleRepository.findAll();
         System.out.println(vehiclesDb);
         int vehicleIndex = Integer.parseInt(scanner.nextLine());
         Vehicle vehicle = vehiclesDb.get(vehicleIndex + 1);
 
 
-        System.out.print("Inform the agency to collect the vehicle: ");
+        System.out.print("Informe o número identificador da agência para retirada: ");
         List<Company> companies = companyRepository.findAll();
         System.out.println(companies);
         int companyIndex = Integer.parseInt(scanner.nextLine());
@@ -77,13 +83,23 @@ public class RentalSubMenu {
         companyIndex = Integer.parseInt(scanner.nextLine());
         Company companyReturn = companies.get(companyIndex + 1);
 
-        //ToDo
-        // data retirada
-        // data devolucao
 
 
-        System.out.print("Invoice: ");
-       /* boolean isRented = scanner.nextBoolean();
+
+        Scanner sc = new Scanner(System.in);
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+        System.out.println("Digite a data de retirada ( dd/MM/yyy hh:mm): ");
+        LocalDateTime start = LocalDateTime.parse(sc.nextLine(),fmt);
+        System.out.println("Digite a data de devolução ( dd/MM/yyy hh:mm): ");
+        LocalDateTime finish = LocalDateTime.parse(sc.nextLine(),fmt);
+        fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+
+
+        System.out.print("Fatura: ");
+        rentalService.createRental(vehicle,client,start,finish,companyWithdraal,companyReturn,PaymentMethod.PIX);
+      /*
 
         int vehicleType;
         do {

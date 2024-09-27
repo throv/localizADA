@@ -24,7 +24,7 @@ public class RentalService {
         }
     }
 
-    private Rental createRental(Vehicle vehicle, Client client, LocalDateTime start, LocalDateTime finish, Company companyWithdrawal, Company companyReturn) {
+    public Rental createRental(Vehicle vehicle, Client client, LocalDateTime start, LocalDateTime finish, Company companyWithdrawal, Company companyReturn,PaymentMethod paymentMethod) {
 
         long days = (Duration.between(start, finish).toDays()); // achar a diferenca em dias e arredonda
 
@@ -32,7 +32,7 @@ public class RentalService {
         double discount = totalPrice * getDiscountRate(client, days);
 
         double finalPrice = totalPrice - discount;
-        Rental rental = new Rental(new Random().nextLong(), client, companyWithdrawal, companyReturn, vehicle, start, finish, new Invoice(finalPrice, totalPrice, discount));
+        Rental rental = new Rental(new Random().nextLong(), client, companyWithdrawal, companyReturn, vehicle, start, finish, new Invoice(finalPrice, totalPrice, discount,paymentMethod));
         return repository.save(rental);
     }
 

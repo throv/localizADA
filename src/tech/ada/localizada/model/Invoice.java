@@ -4,11 +4,17 @@ public class Invoice {
     protected double finalPrice;
     protected double totalPrice;
     protected double discount;
+    protected PaymentMethod paymentMethod;
 
-    public Invoice(double finalPrice, double totalPrice, double discount) {
+
+
+
+    public Invoice(double finalPrice, double totalPrice, double discount, PaymentMethod paymentMethod) {
         this.finalPrice = finalPrice;
         this.totalPrice = totalPrice;
         this.discount = discount;
+        this.paymentMethod = paymentMethod;
+
     }
 
     public double getFinalPrice() {
@@ -33,5 +39,13 @@ public class Invoice {
 
     public void setDiscount(double discount) {
         this.discount = discount;
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }
