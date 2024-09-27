@@ -1,5 +1,6 @@
 package tech.ada.localizada.service.vehicle;
 
+import tech.ada.localizada.model.Company;
 import tech.ada.localizada.model.Vehicle;
 import tech.ada.localizada.repository.vehicle.VehicleRepository;
 
@@ -40,6 +41,25 @@ public class VehicleServiceImpl implements VehicleService {
         return vehicle.orElse(null);
     }
 
+    public void updateModelVehicle(Vehicle vehicle, String model) {
+        vehicle.setModel(model);
+    }
+
+    public void updateVehicleYear(Vehicle vehicle, int newYear) {
+        vehicle.setYear(newYear);
+    }
+
+    public void updateVehiclePlate(Vehicle vehicle, String newPlate) {
+        vehicle.setPlate(newPlate);
+    }
+
+    public void updateVehicleVehicleCompany(Vehicle vehicle, Company company) {
+        vehicle.setFindVehicleAgency(company);
+    }
+
+    public void updateVehicleVehicleRented(Vehicle vehicle,Boolean isRented) {
+        vehicle.setVehicleRented(isRented);
+    }
 
 
 }

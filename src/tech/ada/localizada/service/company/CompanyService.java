@@ -13,4 +13,5 @@ public interface CompanyService {
     List<Company> findCompanyByAddress(String address);
     Optional<Company> findCompanyByCNPJ(String cnpj);
     List<Company> getAllCompanies();
+
 }
