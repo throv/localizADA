@@ -6,9 +6,10 @@ import tech.ada.localizada.repository.RepositoryImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class VehicleRepositoryImpl extends RepositoryImpl
-        <Vehicle, Integer> implements Repository <Vehicle, Integer> {
+        <Vehicle, Integer> implements Repository <Vehicle, Integer> , VehicleRepository {
 
     public final List<Vehicle> vehiclesDb = new ArrayList<>();
 
@@ -39,5 +40,9 @@ public class VehicleRepositoryImpl extends RepositoryImpl
     }
 
 
+    @Override
+    public Optional<Vehicle> findByPlate(String plate) {
+        return Optional.empty();
+    }
 
 }

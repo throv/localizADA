@@ -9,6 +9,5 @@ public interface VehicleRepository extends Repository <Vehicle, Integer> {
 
     Optional<Vehicle> findByPlate(String plate);
 
-    void updateVehicleModel(String plate, String newModel);
 
 }
