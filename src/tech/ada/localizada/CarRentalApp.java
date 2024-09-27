@@ -18,6 +18,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class CarRentalApp {
+
+
     public static void main(String[] args) {
 
         /*ClientRepository clientRepository = new ClientRepositoryImpl();
@@ -71,7 +73,6 @@ public class CarRentalApp {
 
 
         RentalService rs = new RentalService();
-
 
 
 
