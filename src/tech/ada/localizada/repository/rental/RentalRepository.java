@@ -1,18 +1,11 @@
 package tech.ada.localizada.repository.rental;
 
+import tech.ada.localizada.model.Client;
 import tech.ada.localizada.model.Rental;
-import tech.ada.localizada.repository.RepositoryImpl;
+import tech.ada.localizada.repository.Repository;
 
 import java.util.List;
 
-public class RentalRepository extends RepositoryImpl<Rental, String> {
-    @Override
-    protected List<Rental> getList() {
-        return List.of();
-    }
-
-    @Override
-    protected String getId(Rental entity) {
-        return "";
-    }
+public interface RentalRepository extends Repository <Rental, Long> {
+    List<Rental> findByClient(Client client);
 }

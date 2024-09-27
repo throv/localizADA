@@ -1,13 +1,21 @@
 package tech.ada.localizada.service.rental;
 
 import tech.ada.localizada.model.*;
+import tech.ada.localizada.repository.rental.RentalRepository;
+import tech.ada.localizada.repository.rental.RentalRepositoryImpl;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Random;
 
+
 public class RentalService {
-    // private double pricePerDay;
+    protected RentalRepository repository;
+
+    public RentalService(){
+        repository=new RentalRepositoryImpl();
+    }
+
     private double getPricePerDay(Vehicle vehicle) {
         if (vehicle instanceof VehicleCar) {
             return 150.0;
@@ -24,7 +32,8 @@ public class RentalService {
         double discount = totalPrice * getDiscountRate(client, days);
 
         double finalPrice = totalPrice - discount;
-        return new Rental(new Random().nextLong(), client, companyWithdrawal, companyReturn, vehicle, start, finish, new Invoice(finalPrice, totalPrice, discount));
+        Rental rental = new Rental(new Random().nextLong(), client, companyWithdrawal, companyReturn, vehicle, start, finish, new Invoice(finalPrice, totalPrice, discount));
+        return repository.save(rental);
     }
 
     private double getDiscountRate(Client client, long days) {
