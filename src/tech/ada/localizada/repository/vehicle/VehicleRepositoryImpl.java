@@ -23,22 +23,12 @@ public class VehicleRepositoryImpl extends RepositoryImpl
         return entity.getId();
     }
 
-
-    public int findIdByPlate(String plate) {
-        return vehiclesDb.stream()
-                .filter(vehicle -> vehicle.getPlate().equalsIgnoreCase(plate))
-                .map(Vehicle::getId)
-                .findFirst()
-                .orElse(-1);
-    }
-
     public Vehicle findVehicleByPlate(String plate) {
         return vehiclesDb.stream()
                 .filter(vehicle -> vehicle.getPlate().equalsIgnoreCase(plate))
                 .findFirst()
                 .orElse(null); // Retorna null se não encontrar o veículo
     }
-
 
     @Override
     public Optional<Vehicle> findByPlate(String plate) {

@@ -12,9 +12,6 @@ public class Rental {
     protected LocalDateTime finish;
     protected Invoice invoice;
 
-
-
-
     public Rental(long id,Client client, Company companyWithdrawal, Company companyReturn, Vehicle vehicle, LocalDateTime start, LocalDateTime finish,Invoice invoice) {
         this.id=id;
         this.client = client;
