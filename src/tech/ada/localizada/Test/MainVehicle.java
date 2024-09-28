@@ -17,8 +17,10 @@ public class MainVehicle {
         CompanyService companyService = new CompanyServiceImpl(companyRepository);
 
         Company company1 = new Company ("Eldorado", "Rua Joao", "Suzao","123");
+        Company company2 = new Company("Salvaodr","Rua Jose", "Mogi", "456");
 
         companyService.addCompany(company1);
+        companyService.addCompany(company2);
 
         System.out.println(companyRepository.findAll());
 
