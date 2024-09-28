@@ -26,6 +26,18 @@ public class VehicleSubMenu {
         int option;
 
         do {
+            String options = """
+                    
+                    = ------------------------------- =
+                    |          Menu veículo           |
+                    = ------------------------------- =
+                    
+                    = ---------=== Menu ===---------- =
+                    | 1 - Adicionar                        |
+                    | 2 - Moto                        |
+                    | 3 - Caminhão                    |
+                    = ------------------------------- =
+                    """;
             System.out.println("Menu:");
             System.out.println("1 - Adicionar Carro");
             System.out.println("2 - Editar Carro");
@@ -90,14 +102,24 @@ public class VehicleSubMenu {
 
         int vehicleType;
         do {
+            String options = """
+                    
+                    = ------------------------------- =
+                    |    Escolha o tipo de veículo?   |
+                    = ------------------------------- =
+                    
+                    = -------=== Escolher ===-------- =
+                    | 1 - Carro                       |
+                    | 2 - Moto                        |
+                    | 3 - Caminhão                    |
+                    = ------------------------------- =
+                    """;
 
-            System.out.println("Escolha o tipo de veículo:");
-            System.out.println("1 - Carro");
-            System.out.println("2 - Moto");
-            System.out.println("3 - Caminhão");
+            System.out.println(options);
             System.out.print("Escolha uma opção: ");
             vehicleType = scanner.nextInt();
             scanner.nextLine();
+
             switch (vehicleType) {
                 case 1:
                     createVehicleCarSubMenu(model,year,plate,company,isRented);
@@ -144,13 +166,22 @@ public class VehicleSubMenu {
         int opcao;
 
         do {
-            System.out.println("Qual informação deseja editar");
-            System.out.println("1 - Editar Modelo do Carro");
-            System.out.println("2 - Editar Placa do Carro");
-            System.out.println("3 - Editar Ano do Carro");
-            System.out.println("4 - Voltar ao menu principal");
-            System.out.print("Escolha uma opção: ");
+            String options = """
 
+                    = ------------------------------- =
+                    |  Qual informação deseja editar? |
+                    = ------------------------------- =
+                    
+                    = --------=== Editar ===--------- =
+                    | 1 - Modelo do Veículo           |
+                    | 2 - Placa do Veículo            |
+                    | 3 - Ano do Veículo              |
+                    | 4 - Voltar                      |
+                    = ------------------------------- =
+                    """;
+
+            System.out.println(options);
+            System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt();
             scanner.nextLine();
 

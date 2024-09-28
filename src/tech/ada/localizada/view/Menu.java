@@ -19,20 +19,20 @@ public class Menu {
             String options = """
 
                     = ------------------------------- =
-                    |      Vehicle Rental System      |
+                    |   Sistema Aluguel de Veículos   |
                     = ------------------------------- =
                     
                     = ---------=== Menu ===---------- =
-                    | 1 - Client                      |
-                    | 2 - Vehicle                     |
-                    | 3 - Company                     |
-                    | 4 - Rent                        |
-                    | 5 - Exit                        |
+                    | 1 - Cliente                     |
+                    | 2 - Veículo                     |
+                    | 3 - Agência                     |
+                    | 4 - Aluguel                     |
+                    | 5 - Sair                        |
                     = ------------------------------- =
                     """;
 
             System.out.println(options);
-            System.out.print("Enter an option: ");
+            System.out.print("Digite uma opção: ");
             String optionString = input.next();
 
             try {
