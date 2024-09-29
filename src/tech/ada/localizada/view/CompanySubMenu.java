@@ -104,14 +104,11 @@ public class CompanySubMenu {
                 .findFirst()
                 .orElse(null);
         if (company != null) {
-            System.out.print("Informe o ID do veículo: ");
-            int vehicleId = scanner.nextInt();
-            scanner.nextLine();
-            Vehicle vehicleToRemove = company.getVehicles().stream()
-                    .filter(v -> v.getId() == vehicleId)
-                    .findFirst()
-                    .orElse(null);
+            System.out.print("Informe a placa do veículo: ");
+            String vehiclePlate = scanner.nextLine();
+            Vehicle vehicleToRemove = vehicleService.getVehicleByPlate(vehiclePlate);
             if (vehicleToRemove != null) {
+                int vehicleId = vehicleToRemove.getId();
                 company.removeVehicle(vehicleToRemove);
                 companyService.updateCompany(companyId, company);
                 vehicleService.deleteVehicle(vehicleId);

@@ -31,6 +31,11 @@ public class VehicleServiceImpl implements VehicleService {
         return vehicle.orElse(null);
     }
 
+    public Vehicle getVehicleByPlate(String plate) {
+        Optional<Vehicle> vehicle = vehicleRepository.findByPlate(plate);
+        return vehicle.orElse(null);
+    }
+
     @Override
     public List<Vehicle> listVehicle() {
         return vehicleRepository.findAll();
