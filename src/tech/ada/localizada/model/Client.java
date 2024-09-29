@@ -5,8 +5,7 @@ public abstract class Client {
     private String email;
     private Address address;
 
-
-    public Client(String name, String email) {
+    protected Client(String name, String email) {
         this.name = name;
         this.email = email;
     }
@@ -26,6 +25,7 @@ public abstract class Client {
         this.email = email;
     }
 
+<<<<<<< HEAD
 
     @Override
     public String toString() {
@@ -38,5 +38,13 @@ public abstract class Client {
                 = ----------------------------------------
                 """, name, email, address);
         return data;
+=======
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+>>>>>>> aba3fae072504eef9dbefe1cbd977c54fb0915c5
     }
 }

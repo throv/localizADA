@@ -1,5 +1,7 @@
 package tech.ada.localizada.service.company;
 
+import tech.ada.localizada.exception.CompanyAlreadyExistsException;
+import tech.ada.localizada.exception.CompanyNotFoundException;
 import tech.ada.localizada.model.Company;
 import tech.ada.localizada.repository.company.CompanyRepository;
 
@@ -22,7 +24,7 @@ public class CompanyServiceImpl implements CompanyService {
             company.setId(id++);
             companyRepository.save(company);
         } else {
-            System.err.println("There is already a company with this CNPJ.");
+           throw new CompanyAlreadyExistsException("There is already a company with this CNPJ.");
         }
     }
 
@@ -31,7 +33,7 @@ public class CompanyServiceImpl implements CompanyService {
         Optional<Company> existingCompany = companyRepository.findById(id);
 
         if (existingCompany.isEmpty()) {
-            throw new IllegalArgumentException("Client with ID " + id + " was not found.");
+            throw new CompanyNotFoundException("Company with ID " + id + " was not found.");
         }
 
         Company companyToUpdate = existingCompany.get();

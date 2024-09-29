@@ -143,7 +143,7 @@ public class ClientSubMenu {
         System.out.println("\nDigite o ID do cliente que deseja atualizar:");
         String id = scanner.nextLine();
 
-        // Buscar o cliente pelo ID
+
         Client client = clientService.getClientById(id);
 
         if (client == null) {
@@ -151,7 +151,6 @@ public class ClientSubMenu {
             return;
         }
 
-        // Verificar se o cliente é Pessoa Física (NaturalPerson) ou Jurídica (LegalEntity)
         if (client instanceof NaturalPerson) {
             updateClientNP((NaturalPerson) client);
         } else if (client instanceof LegalEntity) {
@@ -171,12 +170,10 @@ public class ClientSubMenu {
         System.out.print("\nDigite o novo CPF do cliente: ");
         String cpf = scanner.nextLine();
 
-        // Atualizar os dados do cliente
         client.setName(name);
         client.setEmail(email);
         client.setCpf(cpf);
 
-        // Chamar o serviço para atualizar
         clientService.updateClient(client.getId(), client);
         System.out.println("\nCLIENTE (PESSOA FÍSICA) ATUALIZADO COM SUCESSO!");
     }
@@ -191,12 +188,10 @@ public class ClientSubMenu {
         System.out.print("\nDigite o novo CNPJ do cliente: ");
         String cnpj = scanner.nextLine();
 
-        // Atualizar os dados do cliente
         client.setName(name);
         client.setEmail(email);
         client.setCnpj(cnpj);
 
-        // Chamar o serviço para atualizar
         clientService.updateClient(client.getId(), client);
         System.out.println("\nCLIENTE (PESSOA JURÍDICA) ATUALIZADO COM SUCESSO!");
     }

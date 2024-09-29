@@ -15,6 +15,8 @@ public class Menu {
     private ClientService clientService;
 
     VehicleSubMenu vehicleSubMenu = new VehicleSubMenu(vehicleService, companyService);
+    CompanySubMenu companySubMenu = new CompanySubMenu(companyService, vehicleService);
+    RentalSubMenu rentalSubMenu = new RentalSubMenu(rentalService,clientService,vehicleService,companyService);
     ClientSubMenu clientSubMenu = new ClientSubMenu(clientService);
 
     public Menu(VehicleService vehicleService, CompanyService companyService,
@@ -72,10 +74,10 @@ public class Menu {
                     vehicleSubMenu.startMenuVehicle();
                     break;
                 case 3:
-                    System.out.println("Company menu");
+                    companySubMenu.showMenu();
                     break;
                 case 4:
-                    System.out.println("Rent menu");
+                    rentalSubMenu.showMenu();
                     break;
                 case 5:
                     System.out.println("Saindo...");
@@ -83,6 +85,7 @@ public class Menu {
                 default:
                     break;
             }
+
         } while (option != 5);
     }
 }

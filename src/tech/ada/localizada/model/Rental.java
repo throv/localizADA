@@ -55,6 +55,7 @@ public class Rental {
         this.companyReturn = companyReturn;
     }
 
+
     public Vehicle getVehicle() {
         return vehicle;
     }
@@ -85,5 +86,19 @@ public class Rental {
 
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
+    }
+
+    @Override
+    public String toString() {
+        return "Rental{" +
+                "id=" + id +
+                ", client=" + client +
+                ", companyWithdrawal=" + companyWithdrawal +
+                ", companyReturn=" + companyReturn +
+                ", vehicle=" + vehicle +
+                ", start=" + start +
+                ", finish=" + finish +
+                ", invoice=" + invoice +
+                '}';
     }
 }

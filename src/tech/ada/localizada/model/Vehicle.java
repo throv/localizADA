@@ -10,7 +10,7 @@ public abstract class Vehicle {
     private Company findVehicleAgency;
     private boolean isVehicleRented;
 
-    public Vehicle(String model, int year, String plate, Company findVehicleAgency,
+    protected Vehicle(String model, int year, String plate, Company findVehicleAgency,
                    boolean isVehicleRented) {
         this.id = ++idCounter;
         this.model = model;

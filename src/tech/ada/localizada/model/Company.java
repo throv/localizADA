@@ -1,5 +1,8 @@
 package tech.ada.localizada.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Company {
 
     private int id;
@@ -7,6 +10,7 @@ public class Company {
     private String address;
     private String city;
     private String cnpj;
+    private List<Vehicle> vehicles;
 
     public Company(String name, String address, String city, String cnpj) {
         this.name = name;
@@ -14,6 +18,7 @@ public class Company {
         this.city = city;
         this.cnpj = cnpj;
         this.id = 0;
+        this.vehicles = new ArrayList<>();
     }
 
     public int getId() {
@@ -54,6 +59,18 @@ public class Company {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    public List<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public void addVehicle(Vehicle vehicle) {
+        this.vehicles.add(vehicle);
+    }
+
+    public void removeVehicle(Vehicle vehicle) {
+        this.vehicles.remove(vehicle);
     }
 
     @Override

@@ -1,5 +1,8 @@
 package tech.ada.localizada.service.client;
 
+import tech.ada.localizada.exception.ClientAlreadyExistsException;
+import tech.ada.localizada.exception.ClientNotFoundException;
+import tech.ada.localizada.exception.DocumentNotAcceptedException;
 import tech.ada.localizada.model.Client;
 import tech.ada.localizada.repository.client.ClientRepository;
 
@@ -16,11 +19,35 @@ public class ClientServiceImpl implements ClientService {
         this.clientRepository = clientRepository;
     }
 
+    private void validateClient(Client client) {
+
+        if (client.getName() == null || client.getName().isBlank()) {
+            throw new IllegalArgumentException("Name is required.");
+        }
+
+        String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        if (client.getEmail() == null || !client.getEmail().matches(EMAIL_REGEX)) {
+            throw new IllegalArgumentException("Invalid email format.");
+        }
+
+        validateDocument(client.getId());
+    }
+
+    private void validateDocument(String document) {
+
+        if (!document.matches("\\d{11}") && !document.matches("\\d{14}")) {
+            throw new DocumentNotAcceptedException("Invalid document format. Must be 11 digits for CPF or 14 digits for CNPJ.");
+        }
+    }
+
+
     @Override
     public Client createClient(Client client) {
 
+        validateClient(client);
+
         if (clientRepository.findById(client.getId()).isPresent()) {
-            throw new IllegalArgumentException("Client with ID " + client.getId() + " already exists.");
+            throw new ClientAlreadyExistsException("Client with ID " + client.getId() + " already exists.");
         }
         return clientRepository.save(client);
     }
@@ -28,10 +55,12 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client updateClient(String id, Client client) {
 
+        validateClient(client);
+
         Optional<Client> optionalClient = clientRepository.findById(id);
 
         if (optionalClient.isEmpty()) {
-            throw new IllegalArgumentException("Client with ID " + client.getId() + " was not found.");
+            throw new ClientNotFoundException("Client with ID " + client.getId() + " was not found.");
         }
 
         Client existingClient = optionalClient.get();
@@ -49,7 +78,7 @@ public class ClientServiceImpl implements ClientService {
 
 
         if (clientRepository.findById(id).isEmpty()) {
-            throw new IllegalArgumentException("Client with ID " + id + " was not found.");
+            throw new ClientNotFoundException("Client with ID " + id + " was not found.");
         }
 
 
@@ -60,7 +89,7 @@ public class ClientServiceImpl implements ClientService {
     public Client getClientById(String id) {
         return clientRepository
                 .findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Client with ID " + id + "could not be found. No resources deleted."));
+                .orElseThrow(() -> new ClientNotFoundException("Client with ID " + id + "could not be found. No resources deleted."));
     }
 
     @Override
