@@ -37,6 +37,11 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
+    public List<Vehicle> listVehicleByCompany(Company company) {
+        return vehicleRepository.findByCompany(company);
+    }
+
+    @Override
     public void updateModelVehicle(Vehicle vehicle, String model) {
         vehicle.setModel(model);
     }

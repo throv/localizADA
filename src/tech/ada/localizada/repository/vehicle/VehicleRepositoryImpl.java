@@ -1,5 +1,6 @@
 package tech.ada.localizada.repository.vehicle;
 
+import tech.ada.localizada.model.Company;
 import tech.ada.localizada.model.Vehicle;
 import tech.ada.localizada.repository.Repository;
 import tech.ada.localizada.repository.RepositoryImpl;
@@ -33,6 +34,11 @@ public class VehicleRepositoryImpl extends RepositoryImpl
     @Override
     public Optional<Vehicle> findByPlate(String plate) {
         return Optional.empty();
+    }
+
+    @Override
+    public List<Vehicle> findByCompany(Company company) {
+        return getList().stream().filter(vehicle -> vehicle.getFindVehicleAgency().equals(company)).toList();
     }
 
 }
