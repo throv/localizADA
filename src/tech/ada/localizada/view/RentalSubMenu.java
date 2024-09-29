@@ -84,8 +84,6 @@ public class RentalSubMenu {
         Company companyReturn = companies.get(companyIndex + 1);
 
 
-
-
         Scanner sc = new Scanner(System.in);
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
