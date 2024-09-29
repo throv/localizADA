@@ -5,8 +5,7 @@ public abstract class Client {
     private String email;
     private Address address;
 
-
-    public Client(String name, String email) {
+    protected Client(String name, String email) {
         this.name = name;
         this.email = email;
     }
@@ -26,4 +25,11 @@ public abstract class Client {
         this.email = email;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 }

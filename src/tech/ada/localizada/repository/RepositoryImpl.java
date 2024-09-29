@@ -12,9 +12,7 @@ public abstract class RepositoryImpl<T, I> implements Repository<T, I>  {
     public T save(T entity) {
         Optional<T> existingEntity = findById(getId(entity));
         if(existingEntity.isPresent()) {
-            //getList().remove(existingEntity.get());
-            int i = getList().indexOf(entity);
-            getList().set(i,entity);
+            getList().remove(existingEntity.get());
         }
         getList().add(entity);
         return entity;
