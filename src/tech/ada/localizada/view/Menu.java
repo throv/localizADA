@@ -14,10 +14,10 @@ public class Menu {
     private RentalService rentalService;
     private ClientService clientService;
 
-    VehicleSubMenu vehicleSubMenu = new VehicleSubMenu(vehicleService, companyService);
-    CompanySubMenu companySubMenu = new CompanySubMenu(companyService, vehicleService);
-    RentalSubMenu rentalSubMenu = new RentalSubMenu(rentalService,clientService,vehicleService,companyService);
-    ClientSubMenu clientSubMenu = new ClientSubMenu(clientService);
+    private VehicleSubMenu vehicleSubMenu;
+    private CompanySubMenu companySubMenu;
+    private RentalSubMenu rentalSubMenu;
+    private ClientSubMenu clientSubMenu;
 
     public Menu(VehicleService vehicleService, CompanyService companyService,
                 RentalService rentalService, ClientService clientService) {
@@ -25,6 +25,11 @@ public class Menu {
         this.companyService = companyService;
         this.rentalService = rentalService;
         this.clientService = clientService;
+
+        this.vehicleSubMenu = new VehicleSubMenu(vehicleService, companyService);
+        this.companySubMenu = new CompanySubMenu(companyService, vehicleService);
+        this.rentalSubMenu = new RentalSubMenu(rentalService, clientService, vehicleService, companyService);
+        this.clientSubMenu = new ClientSubMenu(clientService);
     }
 
     Scanner input = new Scanner(System.in);

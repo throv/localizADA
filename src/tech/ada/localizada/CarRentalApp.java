@@ -36,7 +36,7 @@ public class CarRentalApp {
         ClientService clientService = new ClientServiceImpl(new ClientRepositoryImpl());
         ClientSubMenu clientSubMenu = new ClientSubMenu(clientService);
 
-        clientSubMenu.startMenuClient();
+       // clientSubMenu.startMenuClient();
 
         Company company1 = new Company ("Eldorado", "Rua Joao", "Suzao","123");
         Company company2 = new Company("Salvaodr","Rua Jose", "Mogi", "456");
