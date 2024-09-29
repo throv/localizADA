@@ -13,10 +13,17 @@ public class Address {
 
     @Override
     public String toString() {
-        return String.format("""
-                Full address:
-                %n %s, %s
-                %s - %s, %s 
-                """, streetNumber, streetName, neighboorhood, cep, city, state);
+        String data = String.format("""
+
+                = --------=== Dados do Endereço ===----------
+                | Cidade: %s
+                | Estado: %s
+                | Numero: %s
+                | Rua: %s
+                | CEP: %s
+                = ----------------------------------------
+                """, city, state, streetNumber, streetName, cep);
+
+        return data;
     }
 }

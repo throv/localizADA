@@ -63,4 +63,12 @@ public class CompanyServiceImpl implements CompanyService {
     public List<Company> getAllCompanies() {
         return companyRepository.findAll();
     }
+
+    @Override
+    public void printCompanies() {
+        List<Company> companies = companyRepository.findAll();
+        for (Company company : companies) {
+            System.out.print(company);
+        }
+    }
 }

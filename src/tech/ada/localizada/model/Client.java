@@ -26,4 +26,17 @@ public abstract class Client {
         this.email = email;
     }
 
+
+    @Override
+    public String toString() {
+        String data = String.format("""
+
+                = --------=== Dados do Cliente ===----------
+                | Nome: %s
+                | Email: %s
+                | Endereço: %s
+                = ----------------------------------------
+                """, name, email, address);
+        return data;
+    }
 }

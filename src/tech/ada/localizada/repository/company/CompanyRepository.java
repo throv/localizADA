@@ -11,5 +11,4 @@ public interface CompanyRepository extends Repository<Company, Integer> {
     List<Company> findCompanyByName(String name);
     List<Company> findCompanyByAddress(String address);
     Optional<Company> findCompanyByCNPJ(String cnpj);
-
 }

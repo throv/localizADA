@@ -16,4 +16,22 @@ public class VehicleTruck extends Vehicle {
     public void setLoad(double load) {
         this.load = load;
     }
+
+    @Override
+    public String toString() {
+        String data = String.format("""
+
+                = -------=== Dados do Caminhão ===--------
+                | ID: %s
+                | Modelo: %s
+                | Ano: %s
+                | Placa: %s
+                | Agência: %s
+                | Alugado: %s
+                | Carga: %s
+                = ----------------------------------------
+                """, getId(), getModel(), getYear(), getPlate(), getFindVehicleAgency().getName(), (isVehicleRented() ? "Sim" : "Não"), load);
+
+        return data;
+    }
 }

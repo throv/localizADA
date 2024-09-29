@@ -61,8 +61,12 @@ public class VehicleServiceImpl implements VehicleService {
         vehicle.setVehicleRented(isRented);
     }
 
-
-
-
+    @Override
+    public void printVehicles() {
+        List<Vehicle> vehicles = vehicleRepository.findAll();
+        for (Vehicle vehicle : vehicles) {
+            System.out.print(vehicle);
+        };
+    }
 
 }

@@ -68,5 +68,12 @@ public class ClientServiceImpl implements ClientService {
         return clientRepository.findAll();
     }
 
+    @Override
+    public void printClients() {
+        List<Client> clients = clientRepository.findAll();
+        for (Client client : clients) {
+            System.out.print(client);
+        }
+    }
 
 }

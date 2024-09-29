@@ -13,6 +13,7 @@ import tech.ada.localizada.service.company.CompanyService;
 import tech.ada.localizada.service.company.CompanyServiceImpl;
 import tech.ada.localizada.service.rental.RentalService;
 import tech.ada.localizada.service.vehicle.VehicleServiceImpl;
+import tech.ada.localizada.view.ClientSubMenu;
 import tech.ada.localizada.view.Menu;
 
 import java.time.LocalDateTime;
@@ -66,8 +67,11 @@ public class CarRentalApp {
         CompanyServiceImpl companyService = new CompanyServiceImpl(companyRepository);
         RentalRepositoryImpl rentalRepository = new RentalRepositoryImpl();
         RentalService rentalService = new RentalService();
-        ClientRepositoryImpl clientRepository = new ClientRepositoryImpl();
-        ClientServiceImpl clientService = new ClientServiceImpl(clientRepository);
+
+        ClientService clientService = new ClientServiceImpl(new ClientRepositoryImpl());
+        ClientSubMenu clientSubMenu = new ClientSubMenu(clientService);
+
+        clientSubMenu.startMenuClient();
 
         Company company1 = new Company ("Eldorado", "Rua Joao", "Suzao","123");
         Company company2 = new Company("Salvaodr","Rua Jose", "Mogi", "456");

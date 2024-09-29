@@ -58,11 +58,17 @@ public class Company {
 
     @Override
     public String toString() {
-        return "Company{" +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", cnpj='" + cnpj + '\'' +
-                '}';
+        String data = String.format("""
+
+                = --------=== Dados da Agência ===----------
+                | ID: %s
+                | Nome: %s
+                | Endereço: %s
+                | Cidade: %s
+                | CNPJ: %s
+                = ------------------------------------------
+                """, getId(), getName(), getAddress(), getCity(), getCnpj());
+
+        return data;
     }
 }

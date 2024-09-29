@@ -2,8 +2,6 @@ package tech.ada.localizada.model;
 
 public class NaturalPerson extends Client{
 
-
-
     private String cpf;
     public NaturalPerson(String name, String email, String cpf) {
         super(name, email);

@@ -11,5 +11,6 @@ public interface ClientService {
     void deleteClient(String id);
     Client getClientById(String id);
     List<Client> listClients();
+    void printClients();
 
 }

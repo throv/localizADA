@@ -2,7 +2,6 @@ package tech.ada.localizada.model;
 
 public class LegalEntity extends Client {
 
-
     private String cnpj;
     public LegalEntity(String name, String email, String cnpj) {
         super(name, email);
@@ -18,7 +17,6 @@ public class LegalEntity extends Client {
     public void setDocument(String document) {
         this.cnpj = document;
     }
-
 
     public String getCnpj() {
         return cnpj;

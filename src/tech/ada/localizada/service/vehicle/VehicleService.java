@@ -24,4 +24,6 @@ public interface VehicleService {
 
     void updateModelVehicle(Vehicle vehicle, String model);
 
+    void printVehicles();
+
 }

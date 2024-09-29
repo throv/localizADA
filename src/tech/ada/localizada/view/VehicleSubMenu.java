@@ -25,25 +25,22 @@ public class VehicleSubMenu {
         do {
             String options = """
                     
-                    = ------------------------------- =
-                    |          Menu veículo           |
-                    = ------------------------------- =
+                    = ------------------------------------- =
+                    |              Menu Veículo             |
+                    = ------------------------------------- =
                     
-                    = ---------=== Menu ===---------- =
-                    | 1 - Adicionar                        |
-                    | 2 - Moto                        |
-                    | 3 - Caminhão                    |
-                    = ------------------------------- =
+                    = ------------=== Menu ===------------- =
+                    | 1 - Adicionar veículo                 |
+                    | 2 - Editar veículo                    |
+                    | 3 - Excluir veículo                   |
+                    | 4 - Mudar disponibilidade do veículo  |
+                    | 5 - Atualizar localização do veículo  |
+                    | 6 - Sair                              |
+                    = ------------------------------------- =
                     """;
-            System.out.println("Menu:");
-            System.out.println("1 - Adicionar Carro");
-            System.out.println("2 - Editar Carro");
-            System.out.println("3 - Excluir Carro");
-            System.out.println("4 - Mudar Disponibilidade Veiculo");
-            System.out.println("5 - Atualizar localização do Carro");
-            System.out.println("6 - Sair");
-            System.out.print("Escolha uma opção: ");
 
+            System.out.println(options);
+            System.out.print("Escolha uma opção: ");
             option = scanner.nextInt();
             scanner.nextLine();
 
@@ -75,41 +72,41 @@ public class VehicleSubMenu {
 
     public void createVehicleSubMenu() {
 
-        System.out.print("Digite o modelo do carro: ");
+        System.out.print("\nDigite o modelo do carro: ");
         String model = scanner.nextLine();
 
-        System.out.print("Digite o ano do carro: ");
+        System.out.print("\nDigite o ano do carro: ");
         int year = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.print("Digite a placa do carro: ");
+        System.out.print("\nDigite a placa do carro: ");
         String plate = scanner.nextLine();
 
-        System.out.println(companyService.getAllCompanies());
+        companyService.printCompanies();
 
-        System.out.print("Digite o CNPJ da Companhia: ");
+        System.out.print("\nDigite o CNPJ da Companhia: ");
         String cnpjCompany = scanner.nextLine();
 
         Company company = getCompanyByCNPJ(cnpjCompany);
 
-        System.out.println(company);
+        System.out.print(company);
 
-        System.out.print("O carro está alugado? (true/false): ");
+        System.out.print("\nO carro está alugado? (true/false): ");
         boolean isRented = scanner.nextBoolean();
 
         int vehicleType;
         do {
             String options = """
                     
-                    = ------------------------------- =
-                    |    Escolha o tipo de veículo?   |
-                    = ------------------------------- =
+                    = ------------------------------------- =
+                    |       Escolha o tipo de veículo?      |
+                    = ------------------------------------- =
                     
-                    = -------=== Escolher ===-------- =
-                    | 1 - Carro                       |
-                    | 2 - Moto                        |
-                    | 3 - Caminhão                    |
-                    = ------------------------------- =
+                    = ----------=== Escolher ===----------- =
+                    | 1 - Carro                             |
+                    | 2 - Moto                              |
+                    | 3 - Caminhão                          |
+                    = ------------------------------------- =
                     """;
 
             System.out.println(options);
@@ -136,11 +133,12 @@ public class VehicleSubMenu {
     public void createVehicleCarSubMenu(String model, int year, String plate,
                                         Company company, boolean isRented) {
 
-        System.out.print("Digite o número de portas do carro: ");
+        System.out.print("\nDigite o número de portas do carro: ");
         int numberOfDoors = scanner.nextInt();
         VehicleCar vehicleCar = new VehicleCar(model,year,plate,company,isRented,numberOfDoors);
         vehicleService.saveVehicle(vehicleCar);
-        System.out.println(vehicleService.listVehicle());
+        vehicleService.printVehicles();
+        System.out.println("\nCARRO ADICIONADO COM SUCESSO!");
     }
 
     public void createVehicleBikeSubMenu(String model, int year,String plate,
@@ -149,17 +147,20 @@ public class VehicleSubMenu {
         VehicleBike vehicleBike = new VehicleBike(model,year,plate,company,isRented);
         vehicleService.saveVehicle(vehicleBike);
         System.out.println(vehicleService.listVehicle());
+        System.out.println("\nMOTO ADICIONADA COM SUCESSO!");
+
     }
 
     public void createVehicleTruckSubMenu(String model, int year,String plate,
                                         Company company,boolean isRented) {
 
-        System.out.print("Limite de carga co caminhão: ");
+        System.out.print("\nLimite de carga do caminhão: ");
         double loadTruck = scanner.nextDouble();
 
         VehicleTruck vehicleTruck = new VehicleTruck(model,year,plate,company,isRented,loadTruck);
         vehicleService.saveVehicle(vehicleTruck);
         System.out.println(vehicleService.listVehicle());
+        System.out.println("\nCAMINHÃO ADICIONADO COM SUCESSO!");
     }
 
     public void updateVehicleSubMenu() {
@@ -169,16 +170,16 @@ public class VehicleSubMenu {
         do {
             String options = """
 
-                    = ------------------------------- =
-                    |  Qual informação deseja editar? |
-                    = ------------------------------- =
+                    = ------------------------------------- =
+                    |     Qual informação deseja editar?    |
+                    = ------------------------------------- =
                     
-                    = --------=== Editar ===--------- =
-                    | 1 - Modelo do Veículo           |
-                    | 2 - Placa do Veículo            |
-                    | 3 - Ano do Veículo              |
-                    | 4 - Voltar                      |
-                    = ------------------------------- =
+                    = -----------=== Editar ===------------ =
+                    | 1 - Modelo do Veículo                 |
+                    | 2 - Placa do Veículo                  |
+                    | 3 - Ano do Veículo                    |
+                    | 4 - Voltar                            |
+                    = ------------------------------------- =
                     """;
 
             System.out.println(options);
@@ -197,22 +198,19 @@ public class VehicleSubMenu {
                     updateVehicleYearMenu(vehicleService);
                     break;
                 case 4:
-
-                    break;
-                case 5:
                     System.out.println("Saindo...");
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
 
-        } while (opcao != 5);
+        } while (opcao != 4);
     }
 
     public void updateVehicleModelMenu(VehicleService vehicleService) {
         Vehicle vehicle = getVehicleFromUserInput();
         //System.out.println(vehicle);
-        System.out.print("Digite o modelo do carro: ");
+        System.out.print("\nDigite o modelo do carro: ");
         String model = scanner.nextLine();
         vehicleService.updateModelVehicle(vehicle,model);
         //System.out.println(vehicleService.listVehicle());
@@ -221,7 +219,7 @@ public class VehicleSubMenu {
     public void updateVehicleYearMenu(VehicleService vehicleService) {
         Vehicle vehicle = getVehicleFromUserInput();
         //System.out.println(vehicle);
-        System.out.print("Digite o novo ano do carro: ");
+        System.out.print("\nDigite o novo ano do carro: ");
         int newYear = Integer.parseInt(scanner.nextLine());
         vehicleService.updateVehicleYear(vehicle,newYear);
         vehicleService.listVehicle();
@@ -231,7 +229,7 @@ public class VehicleSubMenu {
     public void updateVehiclePlateMenu(VehicleService vehicleService) {
         Vehicle vehicle = getVehicleFromUserInput();
         //System.out.println(vehicle);
-        System.out.print("Digite a nova placa do carro: ");
+        System.out.print("\nDigite a nova placa do carro: ");
         String newPlate = scanner.nextLine();
         vehicleService.updateVehiclePlate(vehicle,newPlate);
         //System.out.println(vehicleService.listVehicle());
@@ -241,7 +239,7 @@ public class VehicleSubMenu {
         Vehicle vehicle = getVehicleFromUserInput();
         //System.out.println(vehicle);
         System.out.println(companyService.getAllCompanies());
-        System.out.print("Digite o novo CNPJ da Companhia: ");
+        System.out.print("\nDigite o novo CNPJ da Companhia: ");
         String newCnpjCompany = scanner.nextLine();
         Company newCompany = getCompanyByCNPJ(newCnpjCompany);
         vehicleService.updateVehicleVehicleCompany(vehicle,newCompany);
@@ -251,7 +249,7 @@ public class VehicleSubMenu {
     public void updateVehicleRented (VehicleService vehicleService) {
         Vehicle vehicle = getVehicleFromUserInput();
         //System.out.println(vehicle);
-        System.out.print("Digite aqui é true ou false ? (true/false): ");
+        System.out.print("\nDigite aqui é true ou false ? (true/false): ");
         boolean isRented = scanner.nextBoolean();
         vehicleService.updateVehicleRented(vehicle, isRented);
         //System.out.println(vehicleService.listVehicle());
@@ -264,7 +262,7 @@ public class VehicleSubMenu {
     }
 
     public Vehicle getVehicleFromUserInput() {
-        System.out.print("Digite a placa do carro: ");
+        System.out.print("\nDigite a placa do carro: ");
         String plate = scanner.nextLine();
         return getVehiclebyPlate(plate);
     }

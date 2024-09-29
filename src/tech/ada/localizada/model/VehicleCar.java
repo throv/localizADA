@@ -21,17 +21,21 @@ public class VehicleCar extends Vehicle {
 
     @Override
     public String toString() {
-        return "VehicleCar {" +
-                "ID: " + getId() + "\n" +
-                "Model: " + getModel() + "\n" +
-                "Year: " + getYear() + "\n" +
-                "Plate: " + getPlate() + "\n" +
-                "Agency: " + getFindVehicleAgency().getName() + "\n" +
-                "Rented: " + (isVehicleRented() ? "Yes" : "No") + "\n" +
-                "Number of Doors: " + numberOfDoors + "\n" +
-                '}';
-    }
+        String data = String.format("""
 
+                = --------=== Dados do Carro ===----------
+                | ID: %s
+                | Modelo: %s
+                | Ano: %s
+                | Placa: %s
+                | Agência: %s
+                | Alugado: %s
+                | Número de Portas: %s
+                = ----------------------------------------
+                """, getId(), getModel(), getYear(), getPlate(), getFindVehicleAgency().getName(), (isVehicleRented() ? "Sim" : "Não"), numberOfDoors);
+
+        return data;
+    }
 }
 
 

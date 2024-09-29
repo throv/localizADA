@@ -14,6 +14,9 @@ public class Menu {
     private RentalService rentalService;
     private ClientService clientService;
 
+    VehicleSubMenu vehicleSubMenu = new VehicleSubMenu(vehicleService, companyService);
+    ClientSubMenu clientSubMenu = new ClientSubMenu(clientService);
+
     public Menu(VehicleService vehicleService, CompanyService companyService,
                 RentalService rentalService, ClientService clientService) {
         this.vehicleService = vehicleService;
@@ -32,41 +35,40 @@ public class Menu {
 
             String options = """
                     
-                    = ------------------------------- =
-                    |      Vehicle Rental System      |
-                    = ------------------------------- =
+                    = ------------------------------------- =
+                    |       Sistema Aluguel de Veículos     |
+                    = ------------------------------------- =
                     
-                    = ---------=== Menu ===---------- =
-                    | 1 - Client                      |
-                    | 2 - Vehicle                     |
-                    | 3 - Company                     |
-                    | 4 - Rent                        |
-                    | 5 - Exit                        |
-                    = ------------------------------- =
+                    = ------------=== Menu ===------------- =
+                    | 1 - Cliente                           |
+                    | 2 - Veículo                           |
+                    | 3 - Agência                           |
+                    | 4 - Aluguel                           |
+                    | 5 - Sair                              |
+                    = ------------------------------------- =
                     """;
 
             System.out.println(options);
-            System.out.print("Enter an option: ");
+            System.out.print("Digite uma opção: ");
             String optionString = input.next();
 
             try {
                 option = Integer.parseInt(optionString);
                 input.nextLine();
             } catch (NumberFormatException e) {
-                System.err.println("Error: Please enter a valid option!\n");
+                System.out.println("\nError: Please enter a valid option!");
                 continue;
             }
 
             if (option < 1 || option > 5) {
-                System.err.println("Error: Please enter a valid option!\n");
+                System.out.println("\nError: Please enter a valid option!");
             }
 
             switch (option) {
                 case 1:
-
+                    clientSubMenu.startMenuClient();
                     break;
                 case 2:
-                    VehicleSubMenu vehicleSubMenu = new VehicleSubMenu(vehicleService, companyService);
                     vehicleSubMenu.startMenuVehicle();
                     break;
                 case 3:
@@ -76,7 +78,7 @@ public class Menu {
                     System.out.println("Rent menu");
                     break;
                 case 5:
-                    System.out.println("Leaving...");
+                    System.out.println("Saindo...");
                     break;
                 default:
                     break;
