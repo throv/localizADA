@@ -71,7 +71,8 @@ public class Menu {
                         vehicleSubMenu.startMenuVehicle();
                         break;
                     case 3:
-                        System.out.println("Company menu");
+                        CompanySubMenu companySubMenu = new CompanySubMenu(companyService, vehicleService);
+                        companySubMenu.showMenu();
                         break;
                     case 4:
                         RentalSubMenu rentalSubMenu = new RentalSubMenu(rentalService,clientService,vehicleService,companyService);
