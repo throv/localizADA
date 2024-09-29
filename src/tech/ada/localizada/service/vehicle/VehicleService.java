@@ -13,6 +13,7 @@ public interface VehicleService {
     Vehicle getVehicleById(int id);
 
     List<Vehicle> listVehicle();
+    List<Vehicle> listVehicleByCompany(Company company);
 
     void updateVehicleRented(Vehicle vehicle, boolean isRented);
 

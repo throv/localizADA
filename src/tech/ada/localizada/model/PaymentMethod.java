@@ -4,6 +4,5 @@ public enum PaymentMethod {
     PIX,
     CARTAOCREDITO,
     CARTAODEBITO,
-    BOLETO,
     DINHEIRO,
 }

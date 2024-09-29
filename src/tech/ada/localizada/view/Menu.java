@@ -4,6 +4,7 @@ import tech.ada.localizada.service.client.ClientService;
 import tech.ada.localizada.service.company.CompanyService;
 import tech.ada.localizada.service.rental.RentalService;
 import tech.ada.localizada.service.vehicle.VehicleService;
+import tech.ada.localizada.service.vehicle.VehicleServiceImpl;
 
 import java.util.Scanner;
 
@@ -73,7 +74,8 @@ public class Menu {
                         System.out.println("Company menu");
                         break;
                     case 4:
-                        System.out.println("Rent menu");
+                        RentalSubMenu rentalSubMenu = new RentalSubMenu(rentalService,clientService,vehicleService,companyService);
+                        rentalSubMenu.showMenu();
                         break;
                     case 5:
                         System.out.println("Leaving...");
