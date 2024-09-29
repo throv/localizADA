@@ -1,10 +1,12 @@
 package tech.ada.localizada.model;
 
+import tech.ada.localizada.util.Util;
+
 public class NaturalPerson extends Client{
 
     private String cpf;
-    public NaturalPerson(String name, String email, String cpf) {
-        super(name, email);
+    public NaturalPerson(String name, String email, String phone, String cpf) {
+        super(name, email, phone);
         this.cpf = cpf;
     }
 
@@ -24,5 +26,20 @@ public class NaturalPerson extends Client{
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    @Override
+    public String toString() {
+        String data = String.format("""
+
+                = --------=== Dados do Cliente ===--------
+                | Id: %s
+                | Nome: %s
+                | Email: %s
+                | Telefone: %s
+                | CPF: %s
+                = ----------------------------------------
+                """, getId(), getName(), getEmail(), Util.formatPhone(getPhone()), Util.formatCpf(getCpf()));
+        return data;
     }
 }

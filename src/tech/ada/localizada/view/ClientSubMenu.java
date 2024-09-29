@@ -4,6 +4,7 @@ import tech.ada.localizada.model.Client;
 import tech.ada.localizada.model.LegalEntity;
 import tech.ada.localizada.model.NaturalPerson;
 import tech.ada.localizada.service.client.ClientService;
+import tech.ada.localizada.util.Util;
 
 import java.util.Scanner;
 
@@ -57,6 +58,7 @@ public class ClientSubMenu {
     }
 
     public void createClientSubMenu() {
+
         int option = 0;
 
         do {
@@ -114,10 +116,13 @@ public class ClientSubMenu {
         System.out.print("\nDigite o e-mail do cliente (PF): ");
         String email = scanner.nextLine();
 
-        System.out.println("\nDigite o CPF do cliente: ");
+        System.out.print("\nDigite o telefone do cliente (PF): ");
+        String phone = scanner.nextLine();
+
+        System.out.print("\nDigite o CPF do cliente: ");
         String cpf = scanner.nextLine();
 
-        NaturalPerson naturalPerson = new NaturalPerson(name, email, cpf);
+        NaturalPerson naturalPerson = new NaturalPerson(name, email, phone, cpf);
         clientService.createClient(naturalPerson);
         System.out.println("\nCLIENTE (PESSOA FÍSICA) ADICIONADO COM SUCESSO!");
     }
@@ -130,24 +135,27 @@ public class ClientSubMenu {
         System.out.print("\nDigite o e-mail do cliente (PJ): ");
         String email = scanner.nextLine();
 
+        System.out.print("\nDigite o telefone do cliente (PJ): ");
+        String phone = scanner.nextLine();
+
         System.out.print("\nDigite o CNPJ do cliente: ");
         String cnpj = scanner.nextLine();
 
-        LegalEntity legalEntity = new LegalEntity(name, email, cnpj);
+        LegalEntity legalEntity = new LegalEntity(name, email, phone, cnpj);
         clientService.createClient(legalEntity);
         System.out.println("\nCLIENTE (PESSOA JURÍDICA) ADICIONADO COM SUCESSO!");
     }
 
     public void updateClientSubMenu() {
+
         clientService.printClients();
-        System.out.println("\nDigite o ID do cliente que deseja atualizar:");
-        String id = scanner.nextLine();
+        System.out.print("\nDigite o CPF/CNPJ do cliente que deseja atualizar: ");
+        String cpfOrCnpj = Util.validateCnpjAndCpf(scanner.nextLine());
 
-
-        Client client = clientService.getClientById(id);
+        Client client = clientService.getClientById(cpfOrCnpj);
 
         if (client == null) {
-            System.out.println("\nCliente com o ID " + id + " não foi encontrado.");
+            System.out.println("\nCliente com o CPF/CNPJ " + cpfOrCnpj + " não foi encontrado.");
             return;
         }
 
@@ -161,17 +169,22 @@ public class ClientSubMenu {
     }
 
     private void updateClientNP(NaturalPerson client) {
+
         System.out.print("\nDigite o novo nome do cliente (PF): ");
         String name = scanner.nextLine();
 
         System.out.print("\nDigite o novo e-mail do cliente (PF): ");
         String email = scanner.nextLine();
 
+        System.out.print("\nDigite o novo telefone do cliente (PF): ");
+        String phone = scanner.nextLine();
+
         System.out.print("\nDigite o novo CPF do cliente: ");
-        String cpf = scanner.nextLine();
+        String cpf = Util.validateCnpjAndCpf(scanner.nextLine());
 
         client.setName(name);
         client.setEmail(email);
+        client.setPhone(phone);
         client.setCpf(cpf);
 
         clientService.updateClient(client.getId(), client);
@@ -179,17 +192,22 @@ public class ClientSubMenu {
     }
 
     private void updateClientLE(LegalEntity client) {
+
         System.out.print("\nDigite o novo nome do cliente (PJ): ");
         String name = scanner.nextLine();
 
         System.out.print("\nDigite o novo e-mail do cliente (PJ): ");
         String email = scanner.nextLine();
 
+        System.out.print("\nDigite o novo telefone do cliente (PJ): ");
+        String phone = scanner.nextLine();
+
         System.out.print("\nDigite o novo CNPJ do cliente: ");
-        String cnpj = scanner.nextLine();
+        String cnpj = Util.validateCnpjAndCpf(scanner.nextLine());
 
         client.setName(name);
         client.setEmail(email);
+        client.setPhone(phone);
         client.setCnpj(cnpj);
 
         clientService.updateClient(client.getId(), client);

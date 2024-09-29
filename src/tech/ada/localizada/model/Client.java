@@ -3,11 +3,12 @@ package tech.ada.localizada.model;
 public abstract class Client {
     private String name;
     private String email;
-    private Address address;
+    private String phone;
 
-    protected Client(String name, String email) {
+    protected Client(String name, String email, String phone) {
         this.name = name;
         this.email = email;
+        this.phone = phone;
     }
 
     public abstract String getId();
@@ -24,27 +25,24 @@ public abstract class Client {
     public void setEmail(String email) {
         this.email = email;
     }
-
-<<<<<<< HEAD
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+}
 
     @Override
     public String toString() {
         String data = String.format("""
 
-                = --------=== Dados do Cliente ===----------
+                = --------=== Dados do Cliente ===--------
+                | Id: %s
                 | Nome: %s
                 | Email: %s
-                | Endereço: %s
+                | Telefone: %s
                 = ----------------------------------------
-                """, name, email, address);
+                """, getId(),  name, email, phone);
         return data;
-=======
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
->>>>>>> aba3fae072504eef9dbefe1cbd977c54fb0915c5
     }
 }

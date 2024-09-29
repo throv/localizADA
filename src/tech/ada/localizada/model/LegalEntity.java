@@ -1,10 +1,12 @@
 package tech.ada.localizada.model;
 
+import tech.ada.localizada.util.Util;
+
 public class LegalEntity extends Client {
 
     private String cnpj;
-    public LegalEntity(String name, String email, String cnpj) {
-        super(name, email);
+    public LegalEntity(String name, String email, String phone, String cnpj) {
+        super(name, email, phone);
         this.cnpj = cnpj;
     }
 
@@ -24,5 +26,20 @@ public class LegalEntity extends Client {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    @Override
+    public String toString() {
+        String data = String.format("""
+
+                = --------=== Dados do Cliente ===--------
+                | Id: %s
+                | Nome: %s
+                | Email: %s
+                | Telefone: %s
+                | CNPJ: %s
+                = ----------------------------------------
+                """, getId(), getName(), getEmail(), Util.formatPhone(getPhone()), Util.formatCnpj(getCnpj()));
+        return data;
     }
 }
