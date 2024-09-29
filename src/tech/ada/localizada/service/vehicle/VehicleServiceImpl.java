@@ -36,30 +36,33 @@ public class VehicleServiceImpl implements VehicleService {
         return vehicleRepository.findAll();
     }
 
-    public Vehicle getVehicleByPlaca(String plate) {
-        Optional<Vehicle> vehicle = vehicleRepository.findByPlate(plate);
-        return vehicle.orElse(null);
-    }
-
+    @Override
     public void updateModelVehicle(Vehicle vehicle, String model) {
         vehicle.setModel(model);
     }
 
+    @Override
     public void updateVehicleYear(Vehicle vehicle, int newYear) {
         vehicle.setYear(newYear);
     }
 
+    @Override
     public void updateVehiclePlate(Vehicle vehicle, String newPlate) {
         vehicle.setPlate(newPlate);
     }
 
+    @Override
     public void updateVehicleVehicleCompany(Vehicle vehicle, Company company) {
         vehicle.setFindVehicleAgency(company);
     }
 
-    public void updateVehicleVehicleRented(Vehicle vehicle,Boolean isRented) {
+    @Override
+    public void updateVehicleRented(Vehicle vehicle, boolean isRented) {
         vehicle.setVehicleRented(isRented);
     }
+
+
+
 
 
 }

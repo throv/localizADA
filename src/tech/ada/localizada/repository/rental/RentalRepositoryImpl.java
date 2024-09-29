@@ -11,7 +11,6 @@ public class RentalRepositoryImpl extends RepositoryImpl<Rental, Long> implement
 
     private ArrayList<Rental> rentals = new ArrayList<>();
 
-
     @Override
     protected List<Rental> getList() {
         return rentals;

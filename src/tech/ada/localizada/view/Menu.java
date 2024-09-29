@@ -1,15 +1,28 @@
 package tech.ada.localizada.view;
 
+import tech.ada.localizada.service.client.ClientService;
+import tech.ada.localizada.service.company.CompanyService;
+import tech.ada.localizada.service.rental.RentalService;
+import tech.ada.localizada.service.vehicle.VehicleService;
+
 import java.util.Scanner;
 
 public class Menu {
 
+    private VehicleService vehicleService;
+    private CompanyService companyService;
+    private RentalService rentalService;
+    private ClientService clientService;
 
-        private final Scanner input;
+    public Menu(VehicleService vehicleService, CompanyService companyService,
+                RentalService rentalService, ClientService clientService) {
+        this.vehicleService = vehicleService;
+        this.companyService = companyService;
+        this.rentalService = rentalService;
+        this.clientService = clientService;
+    }
 
-    public Menu() {
-            this.input = new Scanner(System.in);
-        }
+    Scanner input = new Scanner(System.in);
 
         public void startMenu () {
 
@@ -50,10 +63,11 @@ public class Menu {
 
                 switch (option) {
                     case 1:
-                        System.out.println("Client menu");
+
                         break;
                     case 2:
-                        System.out.println("Vehicle menu");
+                        VehicleSubMenu vehicleSubMenu = new VehicleSubMenu (vehicleService, companyService);
+                        vehicleSubMenu.startMenuVehicle();
                         break;
                     case 3:
                         System.out.println("Company menu");

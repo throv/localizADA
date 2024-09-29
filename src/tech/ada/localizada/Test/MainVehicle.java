@@ -1,52 +1,34 @@
 package tech.ada.localizada.Test;
 
 import tech.ada.localizada.model.Company;
-import tech.ada.localizada.model.Vehicle;
-import tech.ada.localizada.model.VehicleCar;
 import tech.ada.localizada.repository.company.CompanyRepository;
 import tech.ada.localizada.repository.company.CompanyRepositoryImpl;
 import tech.ada.localizada.repository.vehicle.VehicleRepositoryImpl;
+import tech.ada.localizada.service.company.CompanyService;
+import tech.ada.localizada.service.company.CompanyServiceImpl;
+import tech.ada.localizada.service.vehicle.VehicleServiceImpl;
 import tech.ada.localizada.view.VehicleSubMenu;
 
 public class MainVehicle {
 
     public static void main(String[] args) {
 
+        CompanyRepository companyRepository = new CompanyRepositoryImpl();
+        CompanyService companyService = new CompanyServiceImpl(companyRepository);
 
-        /*CompanyRepositoryImpl companyRepository = new CompanyRepositoryImpl();
+        Company company1 = new Company ("Eldorado", "Rua Joao", "Suzao","123");
+        Company company2 = new Company("Salvaodr","Rua Jose", "Mogi", "456");
 
-        Company empresa1 = new Company("Locadora ElDorado", "Rua João Pedro,", "Suzado", "26434322000130");
+        companyService.addCompany(company1);
+        companyService.addCompany(company2);
+
+        System.out.println(companyRepository.findAll());
 
         VehicleRepositoryImpl vehicleRepository = new VehicleRepositoryImpl();
+        VehicleServiceImpl vehicleService = new VehicleServiceImpl(vehicleRepository);
+        VehicleSubMenu vehicleSubMenu = new VehicleSubMenu(vehicleService, companyService);
 
-        VehicleCar vehicle1 = new VehicleCar(1, "Toyota Corolla", 2021, "ABC-1234", empresa1, true, 4);
-        VehicleCar vehicle2 = new VehicleCar(2, "Honda Civic", 2020, "DEF-5678", empresa1, false, 4);
-        VehicleCar vehicle3 = new VehicleCar(3, "Ford Mustang", 2019, "GHI-9101", empresa1, true, 2);
-        VehicleCar vehicle4 = new VehicleCar(4, "Chevrolet Camaro", 2022, "JKL-1122", empresa1, false, 2);
-        VehicleCar vehicle5 = new VehicleCar(5, "BMW X5", 2023, "MNO-3344", empresa1, true, 4);
-
-        vehicleRepository.save(vehicle1);
-        vehicleRepository.save(vehicle2);
-        vehicleRepository.save(vehicle3);
-        vehicleRepository.save(vehicle4);
-        vehicleRepository.save(vehicle5);
-
-        System.out.println(vehicleRepository.findAll());
-
-        vehicleRepository.delete(1);
-
-        System.out.println(vehicleRepository.findAll());
-
-        System.out.println("------");
-
-        for (int i = 0; i < vehicleRepository.vehiclesDb.size(); i ++ ) {
-            System.out.println("Numero de portas");
-            System.out.println(vehicleRepository.vehiclesDb.get(i));
-        }*/
-
-
+        vehicleSubMenu.startMenuVehicle();
 
     }
-
-
 }
