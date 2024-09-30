@@ -6,4 +6,5 @@ public class VehicleBike extends Vehicle {
         super(model, year, plate, isVehicleRented);
     }
 
+
 }

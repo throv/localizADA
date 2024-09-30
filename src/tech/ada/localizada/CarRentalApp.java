@@ -49,6 +49,7 @@ public class CarRentalApp {
         vehicleService.saveVehicle(vehicle3);
 
         company1.addVehicle(vehicle1);
+        company1.addVehicle(vehicle3);
 
         Client client1 = new NaturalPerson("Joao","lucas@gmail.com","1199773133","00123456789");
 //        Client client2= new LegalEntity("Maribel", "maribel@teste","11111111111","60.949.724/0001-63");
@@ -73,5 +74,8 @@ public class CarRentalApp {
 
         sc.close();
   */
+
+        // 30/10/2024 13:00
+        // 05/11/2024 13:00
     }
 }
