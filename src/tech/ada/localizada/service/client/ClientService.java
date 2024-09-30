@@ -10,7 +10,7 @@ public interface ClientService {
     Client updateClient(String id, Client client);
     void deleteClient(String id);
     Client getClientById(String id);
-    List<Client> listClients();
     void printClients();
+    List<Client> searchClientByName(String name);
 
 }
