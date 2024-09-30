@@ -54,10 +54,10 @@ public class CarRentalApp {
         company1.addVehicle(vehicle1);
         company1.addVehicle(vehicle3);
 
-        Client client1 = new NaturalPerson("Joao","lucas@gmail.com","1199773133","00123456789");
-//        Client client2= new LegalEntity("Maribel", "maribel@teste","11111111111","60.949.724/0001-63");
+        Client client1 = new NaturalPerson("Joao","lucas@gmail.com","11997731331","00123456789");
+        Client client2= new LegalEntity("Maribel", "maribel@teste","11111111111","60.949.724/0001-63");
         clientService.createClient(client1);
-//        clientService.createClient(client2);
+        clientService.createClient(client2);
 
 
 

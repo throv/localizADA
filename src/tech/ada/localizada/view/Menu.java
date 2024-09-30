@@ -90,7 +90,6 @@ public class Menu {
                 default:
                     break;
             }
-            option=0;
         } while (option != 5);
     }
 }

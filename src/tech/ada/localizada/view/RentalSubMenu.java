@@ -150,7 +150,7 @@ public class RentalSubMenu {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime dateTime = null;
         do {
-            System.out.println("\nDigite a data de retirada ( dd/MM/yyy hh:mm ):");
+            System.out.print("\nDigite a data de retirada ( dd/MM/yyy hh:mm ):");
             try {
                 dateTime = LocalDateTime.parse(sc.nextLine(), fmt);
                 if (dateTime.isBefore(LocalDateTime.now())) {
@@ -169,7 +169,7 @@ public class RentalSubMenu {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime dateTime = null;
         do {
-            System.out.println("\nDigite a data de devolução ( dd/MM/yyy hh:mm ):");
+            System.out.print("\nDigite a data de devolução ( dd/MM/yyy hh:mm ):");
             try {
                 dateTime = LocalDateTime.parse(sc.nextLine(), fmt);
                 if (dateTime.isBefore(start)) {
@@ -222,8 +222,8 @@ public class RentalSubMenu {
                 client = clientService.getClientById(clientId);
             } catch (ClientNotFoundException e) {
 
-                System.out.println("Cliente não encontrado. Informe um CPF/CNPJ cadastrado.");
-                System.out.print("Escolha uma opção:1 para cadastrar, qualquer outra tecla para tentar novamente: ");
+                System.out.println("\nCliente não encontrado. Informe um CPF/CNPJ cadastrado.");
+                System.out.print("\nDigite 1 para cadastrar ou enter para tentar novamente: ");
                 String option = scanner.nextLine();
 
                 if ("1".equals(option)) {
@@ -258,7 +258,7 @@ public class RentalSubMenu {
 
         Rental rental = rentalService.devolucaoVeiculo(client, plate);
 
-        System.out.println("O veículo " + rental.getVehicle().getModel() + " foi devolvido com sucesso.");
+        System.out.println("\nO veículo " + rental.getVehicle().getModel() + " foi devolvido com sucesso.");
         System.out.println(rental.comprovanteDevolução());
 
     }
