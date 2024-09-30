@@ -1,4 +1,3 @@
-
 # 🚗 🚙 Projeto: LocalizADA
 
 Projeto criado como requisito para completar o módulo **#3 - Programação Orientada a Objetos II** - do programa **Santander Coders 2024.1 - Back-End**.
@@ -48,15 +47,29 @@ Construir uma aplicação para gerenciar o aluguel de veículos.
 | Carro | R$ 150.00     |
 | Caminhão    | R$ 200.00    |
 
+
+### 📊 Casos de Uso:
+
+<div align="left">
+    <img src="https://cdn.discordapp.com/attachments/1283644982493970518/1290444802332295239/WhatsApp_Image_2024-09-30_at_19.24.18.jpeg?ex=66fc7be0&is=66fb2a60&hm=d14d8cb78693db76ca23b2f55dbecaddb11038821dda5ac39a331efd127ae901&" alt="Casos de Uso" width="600">
+</div>
+
+
+### 📝 Diagrama:
+
+<div align="left">
+    <img src="https://cdn.discordapp.com/attachments/1283644982493970518/1290458822510514267/96890274-916c-4535-9501-c644e379d896.png?ex=66fc88ee&is=66fb376e&hm=922599bac78343d906b7aee79f15f46233050415cf6fe4283eb50c723f0c237f&" alt="Diagrama UML" width="600">
+</div>
+
+
 ## 🙋 Desenvolvedores:
 
 🔴 [@oalleeN](https://github.com/oalleeN) - **Alan Filho**
 
-⭕  [@lucascodebr20](https://github.com/oalleeN) - **Lucas Campos**
+⭕  [@lucascodebr20](https://github.com/lucascodebr20) - **Lucas Campos**
 
 🔴 [@Kahmori](https://github.com/Kahmori) - **Karine Amorim**
 
 ⭕  [@throv](https://github.com/throv) - **Thaís Vieira**
 
 🔴 [@nessartk](https://github.com/nessartk) - **Vanessa Rutkoski**
-
