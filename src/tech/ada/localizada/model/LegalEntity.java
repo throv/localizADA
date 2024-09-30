@@ -33,13 +33,12 @@ public class LegalEntity extends Client {
         String data = String.format("""
 
                 = --------=== Dados do Cliente ===--------
-                | Id: %s
                 | Nome: %s
                 | Email: %s
                 | Telefone: %s
                 | CNPJ: %s
                 = ----------------------------------------
-                """, getId(), getName(), getEmail(), Util.formatPhone(getPhone()), Util.formatCnpj(getCnpj()));
+                """, getName(), getEmail(), Util.formatPhone(getPhone()), Util.formatCnpj(getCnpj()));
         return data;
     }
 }

@@ -33,13 +33,12 @@ public class NaturalPerson extends Client{
         String data = String.format("""
 
                 = --------=== Dados do Cliente ===--------
-                | Id: %s
                 | Nome: %s
                 | Email: %s
                 | Telefone: %s
                 | CPF: %s
                 = ----------------------------------------
-                """, getId(), getName(), getEmail(), Util.formatPhone(getPhone()), Util.formatCpf(getCpf()));
+                """, getName(), getEmail(), Util.formatPhone(getPhone()), Util.formatCpf(getCpf()));
         return data;
     }
 }

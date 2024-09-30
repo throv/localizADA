@@ -19,26 +19,40 @@ public class ClientSubMenu {
 
     public void startMenuClient() {
 
-        int option;
+        int option = 0;
 
         do {
             String options = """
                     
                     = ------------------------------------- =
-                    |             Menu Clientes             |
+                    |             Menu Cliente              |
                     = ------------------------------------- =
                     
                     = ------------=== Menu ===------------- =
                     | 1 - Cadastrar cliente                 |
                     | 2 - Alterar cliente                   |
-                    | 3 - Sair                              |
+                    | 3 - Excluir cliente                   |
+                    | 4 - Buscar cliente                    |
+                    | 5 - Listar clientes                    |
+                    | 6 - Sair                              |
                     = ------------------------------------- =
                     """;
 
             System.out.println(options);
             System.out.print("Escolha uma opção: ");
-            option = scanner.nextInt();
-            scanner.nextLine();
+            String optionString = scanner.next();
+
+            try {
+                option = Integer.parseInt(optionString);
+                scanner.nextLine();
+            } catch (NumberFormatException e) {
+                System.out.println("\nError: Please enter a valid option!");
+                continue;
+            }
+
+            if (option < 1 || option > 6) {
+                System.out.println("\nError: Please enter a valid option!");
+            }
 
             switch (option) {
                 case 1:
@@ -48,13 +62,22 @@ public class ClientSubMenu {
                     updateClientSubMenu();
                     break;
                 case 3:
+                    deleteClientSubMenu();
+                    break;
+                case 4:
+                    searchClientSubMenu();
+                    break;
+                case 5:
+                    listClientsSubMenu();
+                    break;
+                case 6:
                     System.out.println("Saindo...");
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
 
-        } while (option != 3);
+        } while (option != 6);
     }
 
     public void createClientSubMenu() {
@@ -65,7 +88,7 @@ public class ClientSubMenu {
             String options = """
                     
                     = ------------------------------------- =
-                    |             Menu Clientes             |
+                    |             Menu Cliente              |
                     = ------------------------------------- =
                     
                     = ----------=== Cadastrar ===---------- =
@@ -212,5 +235,39 @@ public class ClientSubMenu {
 
         clientService.updateClient(client.getId(), client);
         System.out.println("\nCLIENTE (PESSOA JURÍDICA) ATUALIZADO COM SUCESSO!");
+    }
+
+    public void deleteClientSubMenu() {
+        clientService.printClients();
+        System.out.print("\nDigite o CPF/CNPJ do cliente que deseja excluir: ");
+        String cpfOrCnpj = Util.validateCnpjAndCpf(scanner.nextLine());
+
+        Client client = clientService.getClientById(cpfOrCnpj);
+
+        if (client == null) {
+            System.out.println("\nCliente com o CPF/CNPJ " + cpfOrCnpj + " não foi encontrado.");
+            return;
+        }
+
+        clientService.deleteClient(client.getId());
+        System.out.println("\nCLIENTE EXCLUÍDO COM SUCESSO!");
+    }
+
+    public void searchClientSubMenu() {
+        System.out.print("\nDigite o CPF/CNPJ do cliente que deseja buscar: ");
+        String cpfOrCnpj = Util.validateCnpjAndCpf(scanner.nextLine());
+
+        Client client = clientService.getClientById(cpfOrCnpj);
+
+        if (client == null) {
+            System.out.println("\nCliente com o CPF/CNPJ " + cpfOrCnpj + " não foi encontrado.");
+            return;
+        }
+
+        System.out.println(client);
+    }
+
+    public void listClientsSubMenu() {
+        clientService.printClients();
     }
 }
