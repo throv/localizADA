@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface VehicleRepository extends Repository <Vehicle, Integer> {
 
-    Optional<Vehicle> findByPlate(String plate);
+    Vehicle findByPlate(String plate);
     List<Vehicle> findByCompany(Company company);
 
 
