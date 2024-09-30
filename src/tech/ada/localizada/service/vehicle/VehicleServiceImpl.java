@@ -21,8 +21,9 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public void deleteVehicle(int id) {
+    public boolean deleteVehicle(int id) {
         this.vehicleRepository.delete(id);
+        return false;
     }
 
     @Override
@@ -60,11 +61,6 @@ public class VehicleServiceImpl implements VehicleService {
     public void updateVehiclePlate(Vehicle vehicle, String newPlate) {
         vehicle.setPlate(newPlate);
     }
-
-    /*@Override
-    public void updateVehicleVehicleCompany(Vehicle vehicle, Company company) {
-        vehicle.setFindVehicleAgency(company);
-    }*/
 
     @Override
     public void updateVehicleRented(Vehicle vehicle, boolean isRented) {

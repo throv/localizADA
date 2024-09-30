@@ -131,7 +131,6 @@ public class Rental {
 
 
 
-
     @Override
     public String toString() {
         return "Rental{" +

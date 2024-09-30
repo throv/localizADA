@@ -39,8 +39,8 @@ public class CarRentalApp {
         ClientService clientService = new ClientServiceImpl(new ClientRepositoryImpl());
         ClientSubMenu clientSubMenu = new ClientSubMenu(clientService);
 
-        Company company1 = new Company ("Eldorado", "Rua Joao Pessoa, Nº 15", "Suzano","60.949.723/0001-63");
-        Company company2 = new Company("Salvador","Rua Jose Pedro Augusto Nº 255", "Mogi das Cruzes", "39.710.503/0001-96");
+        Company company1 = new Company ("Eldorado", "Rua Joao Pessoa, Nº 15", "Suzano","60949723000163");
+        Company company2 = new Company("Salvador","Rua Jose Pedro Augusto Nº 255", "Mogi das Cruzes", "39710503000196");
         companyService.addCompany(company1);
         companyService.addCompany(company2);
 
