@@ -250,6 +250,7 @@ public class CompanySubMenu {
     }
 
     public void listVehicles() {
+        companyService.printCompanies();
         System.out.print("\nInforme o ID da empresa: ");
         int companyId = scanner.nextInt();
         scanner.nextLine();
@@ -268,6 +269,7 @@ public class CompanySubMenu {
     }
 
     public void addVehicle(Vehicle vehicle) {
+        companyService.printCompanies();
         System.out.print("\nInforme o ID da empresa: ");
         int companyId = scanner.nextInt();
         scanner.nextLine();
@@ -285,6 +287,7 @@ public class CompanySubMenu {
     }
 
     public void removeVehicle() {
+        companyService.printCompanies();
         System.out.print("\nInforme o ID da empresa: ");
         int companyId = scanner.nextInt();
         scanner.nextLine();

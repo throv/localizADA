@@ -264,6 +264,7 @@ public class VehicleSubMenu {
         System.out.print("\nDigite o modelo do carro: ");
         String model = scanner.nextLine();
         vehicleService.updateModelVehicle(vehicle,model);
+        System.out.println(vehicle);
     }
 
     public void updateVehicleYearMenu(VehicleService vehicleService) {
@@ -274,7 +275,7 @@ public class VehicleSubMenu {
         System.out.print("\nDigite o novo ano do carro: ");
         int newYear = Integer.parseInt(scanner.nextLine());
         vehicleService.updateVehicleYear(vehicle,newYear);
-        vehicleService.listVehicle();
+        System.out.println(vehicle);
     }
 
     public void updateVehiclePlateMenu(VehicleService vehicleService) {
@@ -285,6 +286,7 @@ public class VehicleSubMenu {
         System.out.print("\nDigite a nova placa do carro: ");
         String newPlate = scanner.nextLine().toUpperCase();
         vehicleService.updateVehiclePlate(vehicle,newPlate);
+        System.out.println(vehicle);
     }
 
     public void updateVehicleRented (VehicleService vehicleService) {
@@ -295,6 +297,7 @@ public class VehicleSubMenu {
         System.out.print("\nDigite aqui é true ou false ? (true/false): ");
         boolean isRented = scanner.nextBoolean();
         vehicleService.updateVehicleRented(vehicle, isRented);
+        System.out.println(vehicle);
     }
 
     public void deleteVehicle(VehicleService vehicleService) {
@@ -304,6 +307,7 @@ public class VehicleSubMenu {
             return; }
         vehicleService.deleteVehicle(vehicle.getId());
         System.out.println("\nVEÍCULO EXCLUÍDO COM SUCESSO!");
+        System.out.println(vehicleService.listVehicle());
     }
 
     public void searchVehicle(VehicleService vehicleService) {
