@@ -32,8 +32,11 @@ public class VehicleRepositoryImpl extends RepositoryImpl
     }
 
     @Override
-    public Optional<Vehicle> findByPlate(String plate) {
-        return Optional.empty();
+    public Vehicle findByPlate(String plate) {
+        return vehiclesDb.stream()
+                .filter(vehicle -> vehicle.getPlate().equalsIgnoreCase(plate))
+                .findFirst()
+                .orElse(null); // Retorna null se não encontrar o veículo
     }
 
     @Override

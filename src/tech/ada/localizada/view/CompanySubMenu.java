@@ -60,7 +60,7 @@ public class CompanySubMenu {
                 continue;
             }
 
-            if (option < 1 || option > 4) {
+            if (option < 1 || option > 8) {
                 System.out.println("\nError: Please enter a valid option!");
             }
 
