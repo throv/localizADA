@@ -1,9 +1,11 @@
 package tech.ada.localizada.service.rental;
 
 import tech.ada.localizada.model.*;
+import tech.ada.localizada.repository.company.CompanyRepository;
 import tech.ada.localizada.repository.rental.RentalRepository;
-import tech.ada.localizada.repository.rental.RentalRepositoryImpl;
+import tech.ada.localizada.repository.vehicle.VehicleRepository;
 import tech.ada.localizada.service.company.CompanyService;
+import tech.ada.localizada.service.vehicle.VehicleService;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -13,9 +15,13 @@ import java.util.Random;
 
 public class RentalService {
     protected RentalRepository repository;
+    protected CompanyRepository companyRepository;
+    protected VehicleRepository vehicleRepository;
 
-    public RentalService() {
-        repository = new RentalRepositoryImpl();
+    public RentalService(RentalRepository repository, CompanyRepository companyRepository, VehicleRepository vehicleRepository) {
+        this.repository = repository;
+        this.companyRepository = companyRepository;
+        this.vehicleRepository = vehicleRepository;
     }
 
     private double getPricePerDay(Vehicle vehicle) {
@@ -51,18 +57,33 @@ public class RentalService {
         return 0.0;
     }
 
-    public void devolucaoVeiculo(Client client, String plate) {
+    public Rental devolucaoVeiculo(Client client, String plate) {
         List<Rental> rentals = repository.findByClient(client);
         Rental rental = rentals.stream().filter(r -> r.getVehicle().getPlate().equals(plate)).findFirst().get();
 
+        // Atualiza veículo como não alugado
+        Vehicle vehicle = rental.getVehicle();
+        vehicle.setVehicleRented(false);
+        vehicleRepository.save(vehicle);
 
+        //Tranfere veículo de uma agência para outra quando forem diferentes
+        if (!rental.getCompanyWithdrawal().equals(rental.getCompanyReturn())) {
+            //Remove da agência de origem
+            Company companyWithdrawal = rental.getCompanyWithdrawal();
+            companyWithdrawal.removeVehicle(vehicle);
+            companyRepository.save(companyWithdrawal);
 
-        if (vehicle.isVehicleRented()) {
-            System.out.println("O veículo " + vehicle.getModel() + " foi devolvido com sucesso.");
-
+            //Adiciona na agência de devolução
+            Company companyReturn = rental.getCompanyReturn();
+            companyReturn.addVehicle(vehicle);
+            companyRepository.save(companyReturn);
         }
 
-        // veiculo retornar para agencia ( lista )
+        rental.setFinished(true);
+        repository.save(rental);
+
+        return rental;
+
     }
 
     public List<Rental> findByClient(Client client) {

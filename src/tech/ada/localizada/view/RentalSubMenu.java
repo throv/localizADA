@@ -33,7 +33,6 @@ public class RentalSubMenu {
         int option = 0;
 
         do {
-<<<<<<< Updated upstream
             String options = """
                                         
                     = ------------------------------------- =
@@ -42,17 +41,12 @@ public class RentalSubMenu {
                                         
                     = -------------=== Menu ===------------ =
                     | 1 - Alugar veículo                    |
-                    | 2 - Sair                              |
+                    | 2 - Devolver veículo                  |
+                    | 3 - Sair                              |
                     = ------------------------------------- =
                     """;
 
             System.out.println(options);
-=======
-            System.out.println("Menu:");
-            System.out.println("1 - Alugar Veículo");
-            System.out.println("2 - Devolução");
-            System.out.println("3 - Sair");
->>>>>>> Stashed changes
             System.out.print("Escolha uma opção: ");
 
             try {
@@ -63,7 +57,7 @@ public class RentalSubMenu {
                 continue;
             }
 
-            if (option < 1 || option > 2) {
+            if (option < 1 || option > 3) {
                 System.out.println("\nError: Please enter a valid option!");
             }
 
@@ -73,7 +67,7 @@ public class RentalSubMenu {
                     break;
                 case 2:
                     System.out.println("Devolução");
-
+                    devolverVeiculo();
                 case 3:
                     System.out.println("Saindo...");
                     break;
@@ -86,11 +80,7 @@ public class RentalSubMenu {
 
     public void createRentalSubMenu() {
 
-<<<<<<< Updated upstream
-        System.out.print("\nInforme o seu CPF: ");
-=======
         System.out.print("Informe o seu CPF ou CNPJ: ");
->>>>>>> Stashed changes
         String clientId = scanner.nextLine();
         Client client = clientService.getClientById(clientId);
 
@@ -98,34 +88,19 @@ public class RentalSubMenu {
         System.out.print("\nInforme a agência para a retirada do veículo: ");
         List<Company> companies = companyService.getAllCompanies();
         int companyIndex = Integer.parseInt(scanner.nextLine());
-<<<<<<< Updated upstream
         Company companyWithdraal = companies.get(companyIndex);
-        scanner.nextLine();
-
-        vehicleService.printVehicles();
-        System.out.print("\nSelecione o veículo para a reserva: ");
-        List<Vehicle> vehicles = vehicleService.listVehicleByCompany(companyWithdraal);
-        int vehiclesIndex = Integer.parseInt(scanner.nextLine());
-        Vehicle vehicle = vehicles.get(vehiclesIndex + 1);
-=======
-        Company companyWithdraal = companies.get(companyIndex );
 
 
         System.out.print("Selecione o veículo para a reserva: ");
         System.out.println(vehicleService.listVehicle());
         String vehiclePlate = (scanner.nextLine());
-        Vehicle vehicle = vehicleService.updateVehiclePlate(vehiclePlate);
->>>>>>> Stashed changes
+        Vehicle vehicle = vehicleService.getVehicleByPlate(vehiclePlate);
 
         companyService.printCompanies();
         System.out.print("\nInforme a agência para a devolucão do veículo: ");
         companyIndex = Integer.parseInt(scanner.nextLine());
-<<<<<<< Updated upstream
         Company companyReturn = companies.get(companyIndex);
-=======
-        Company companyReturn = companies.get(companyIndex );
 
->>>>>>> Stashed changes
 
         Scanner sc = new Scanner(System.in);
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -138,14 +113,13 @@ public class RentalSubMenu {
 
         int option = 0;
 
-<<<<<<< Updated upstream
         do {
             String options = """
-                    
+                                        
                     = ------------------------------------- =
                     |           Forma de Pagamento          |
                     = ------------------------------------- =
-                    
+                                        
                     = ----------=== Pagamento ===---------- =
                     | 1 - Pix                               |
                     | 2 - Cartão de Crédito                 |
@@ -169,57 +143,15 @@ public class RentalSubMenu {
                 System.out.println("\nError: Please enter a valid option!");
             }
 
-            PaymentMethod paymentMethod;
-=======
-        System.out.println("Informe a forma de pagamento: ");
-        System.out.println("1- PIX");
-        System.out.println("2- Cartão de Crédito");
-        System.out.println("3- Cartão de Débito");
-        System.out.println("4- Dinheiro");
-        int paymentMethodIndex = Integer.parseInt(scanner.nextLine());
-        PaymentMethod paymentMethod;
->>>>>>> Stashed changes
+            PaymentMethod paymentMethod = switch (option) {
+                case 1 -> PaymentMethod.PIX;
+                case 2 -> PaymentMethod.CARTAOCREDITO;
+                case 3 -> PaymentMethod.CARTAODEBITO;
+                case 4 -> PaymentMethod.DINHEIRO;
+                default -> PaymentMethod.PIX;
+            };
 
-        switch (paymentMethodIndex) {
-            case 1:
-                paymentMethod = PaymentMethod.PIX;
-                break;
-            case 2:
-                paymentMethod = PaymentMethod.CARTAOCREDITO;
-                break;
-            case 3:
-                paymentMethod = PaymentMethod.CARTAODEBITO;
-                break;
-            case 4:
-                paymentMethod = PaymentMethod.DINHEIRO;
-                break;
-
-            default:
-                paymentMethod = PaymentMethod.PIX;
-        }
-
-        vehicle.setVehicleRented(true);
-        Rental rental = rentalService.createRental(vehicle, client, start, finish,
-                companyWithdraal, companyReturn, paymentMethod);
-        System.out.println(rental);
-
-            switch (option) {
-                case 1:
-                    paymentMethod = PaymentMethod.PIX;
-                    break;
-                case 2:
-                    paymentMethod = PaymentMethod.CARTAOCREDITO;
-                    break;
-                case 3:
-                    paymentMethod = PaymentMethod.CARTAODEBITO;
-                    break;
-                case 4:
-                    paymentMethod = PaymentMethod.DINHEIRO;
-                    break;
-                default:
-                    paymentMethod = PaymentMethod.PIX;
-                    break;
-            }
+            vehicle.setVehicleRented(true);
 
             Rental rental = rentalService.createRental(vehicle, client, start, finish, companyWithdraal, companyReturn, paymentMethod);
             System.out.println(rental);
@@ -227,7 +159,7 @@ public class RentalSubMenu {
         } while (option != 4);
     }
 
-    public void devolverVeículo(){
+    public void devolverVeiculo() {
         System.out.println("Digite o seu CPF ou CNPJ:");
         String clientId = scanner.nextLine();
         Client client = clientService.getClientById(clientId);
@@ -236,7 +168,9 @@ public class RentalSubMenu {
         System.out.println(rentalService.findByClient(client));
         String plate = scanner.nextLine();
 
-        rentalService.devolucaoVeiculo(client,plate);
+        Rental rental = rentalService.devolucaoVeiculo(client, plate);
+
+        System.out.println("O veículo " + rental.getVehicle().getModel() + " foi devolvido com sucesso.");
     }
 }
 

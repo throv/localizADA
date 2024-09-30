@@ -31,7 +31,7 @@ public class CarRentalApp {
         CompanyRepositoryImpl companyRepository = new CompanyRepositoryImpl();
         CompanyServiceImpl companyService = new CompanyServiceImpl(companyRepository);
         RentalRepositoryImpl rentalRepository = new RentalRepositoryImpl();
-        RentalService rentalService = new RentalService();
+        RentalService rentalService = new RentalService(rentalRepository, companyRepository, vehicleRepository);
 
         ClientService clientService = new ClientServiceImpl(new ClientRepositoryImpl());
         ClientSubMenu clientSubMenu = new ClientSubMenu(clientService);
@@ -42,15 +42,13 @@ public class CarRentalApp {
         companyService.addCompany(company2);
         Vehicle vehicle1 = new VehicleCar("Uno", 1993,"THX-2020",false,4);
         vehicleService.saveVehicle(vehicle1);
-        Client client1 = new NaturalPerson("Joao","lucas@gmail.com","1199773133","40156215810");
-        clientService.createClient(client1);
 
-        Client client1= new NaturalPerson("Maria", "maria@gmail","12345678911");
-        Client client2= new LegalEntity("Maribel", "maribel@teste","11111111111111");
+        Client client1 = new NaturalPerson("Joao","lucas@gmail.com","1199773133","003.888.789-70");
+        Client client2= new LegalEntity("Maribel", "maribel@teste","11111111111","60.949.724/0001-63");
         clientService.createClient(client1);
         clientService.createClient(client2);
 
-        Vehicle vehicle1 = new VehicleCar("Uno", 2000, "ADA-2024", company1,true,2);
+
 
         Menu menu = new Menu(vehicleService,companyService,rentalService,clientService);
         menu.startMenu();

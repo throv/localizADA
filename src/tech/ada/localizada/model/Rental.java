@@ -11,6 +11,7 @@ public class Rental {
     protected LocalDateTime start;
     protected LocalDateTime finish;
     protected Invoice invoice;
+    protected boolean isFinished;
 
 
     public Rental(long id,Client client, Company companyWithdrawal, Company companyReturn, Vehicle vehicle, LocalDateTime start, LocalDateTime finish,Invoice invoice) {
@@ -87,6 +88,14 @@ public class Rental {
 
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
+    }
+
+    public boolean isFinished() {
+        return isFinished;
+    }
+
+    public void setFinished(boolean finished) {
+        isFinished = finished;
     }
 
     public void comprovanteLocacao(){
