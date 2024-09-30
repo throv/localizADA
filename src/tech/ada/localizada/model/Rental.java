@@ -12,6 +12,7 @@ public class Rental {
     protected LocalDateTime finish;
     protected Invoice invoice;
 
+
     public Rental(long id,Client client, Company companyWithdrawal, Company companyReturn, Vehicle vehicle, LocalDateTime start, LocalDateTime finish,Invoice invoice) {
         this.id=id;
         this.client = client;
@@ -87,6 +88,35 @@ public class Rental {
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
     }
+
+    public void comprovanteLocacao(){
+        String texto= "Comprovante de Locação\n";
+        texto += "----------" + "\n";
+        texto += " Número do contrato: "+getId() + "\n";
+        texto += " Nome Cliente: "+getClient() + "\n";
+        texto += " Agência de retirada do Veículo: "+ getCompanyWithdrawal() + "\n";
+        texto += " Agência de devolução do Veiculo: "+ getCompanyReturn() + "\n";
+        texto += " Veículo: "+ getVehicle() + "\n";
+        texto += " Data da retirada: "+ getStart() + "\n";
+        texto += " Data da devolução: " + getFinish() + "\n";
+        texto += " Fatura: " + getInvoice() + "\n";
+
+    }
+
+    public void comprovanteDevolução(){
+        String texto= "Comprovante de Locação\n";
+        texto += "----------" + "\n";
+        texto += " Número do contrato: "+getId() + "\n";
+        texto += " Nome Cliente: "+getClient() + "\n";
+        texto += " Agência de retirada do Veículo: "+ getCompanyWithdrawal() + "\n";
+        texto += " Agência de devolução do Veiculo: "+ getCompanyReturn() + "\n";
+        texto += " Veículo: "+ getVehicle() + "\n";
+        texto += " Data da retirada: "+ getStart() + "\n";
+        texto += " Data da devolução: " + getFinish() + "\n";
+        texto += " Fatura: " + getInvoice() + "\n";
+
+    }
+
 
     @Override
     public String toString() {

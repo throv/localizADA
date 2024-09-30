@@ -33,6 +33,7 @@ public class RentalSubMenu {
         int option = 0;
 
         do {
+<<<<<<< Updated upstream
             String options = """
                                         
                     = ------------------------------------- =
@@ -46,6 +47,12 @@ public class RentalSubMenu {
                     """;
 
             System.out.println(options);
+=======
+            System.out.println("Menu:");
+            System.out.println("1 - Alugar Veículo");
+            System.out.println("2 - Devolução");
+            System.out.println("3 - Sair");
+>>>>>>> Stashed changes
             System.out.print("Escolha uma opção: ");
 
             try {
@@ -64,20 +71,26 @@ public class RentalSubMenu {
                 case 1:
                     createRentalSubMenu();
                     break;
-
                 case 2:
+                    System.out.println("Devolução");
+
+                case 3:
                     System.out.println("Saindo...");
                     break;
                 default:
                     break;
             }
 
-        } while (option != 2);
+        } while (option != 3);
     }
 
     public void createRentalSubMenu() {
 
+<<<<<<< Updated upstream
         System.out.print("\nInforme o seu CPF: ");
+=======
+        System.out.print("Informe o seu CPF ou CNPJ: ");
+>>>>>>> Stashed changes
         String clientId = scanner.nextLine();
         Client client = clientService.getClientById(clientId);
 
@@ -85,6 +98,7 @@ public class RentalSubMenu {
         System.out.print("\nInforme a agência para a retirada do veículo: ");
         List<Company> companies = companyService.getAllCompanies();
         int companyIndex = Integer.parseInt(scanner.nextLine());
+<<<<<<< Updated upstream
         Company companyWithdraal = companies.get(companyIndex);
         scanner.nextLine();
 
@@ -93,11 +107,25 @@ public class RentalSubMenu {
         List<Vehicle> vehicles = vehicleService.listVehicleByCompany(companyWithdraal);
         int vehiclesIndex = Integer.parseInt(scanner.nextLine());
         Vehicle vehicle = vehicles.get(vehiclesIndex + 1);
+=======
+        Company companyWithdraal = companies.get(companyIndex );
+
+
+        System.out.print("Selecione o veículo para a reserva: ");
+        System.out.println(vehicleService.listVehicle());
+        String vehiclePlate = (scanner.nextLine());
+        Vehicle vehicle = vehicleService.updateVehiclePlate(vehiclePlate);
+>>>>>>> Stashed changes
 
         companyService.printCompanies();
         System.out.print("\nInforme a agência para a devolucão do veículo: ");
         companyIndex = Integer.parseInt(scanner.nextLine());
+<<<<<<< Updated upstream
         Company companyReturn = companies.get(companyIndex);
+=======
+        Company companyReturn = companies.get(companyIndex );
+
+>>>>>>> Stashed changes
 
         Scanner sc = new Scanner(System.in);
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -110,6 +138,7 @@ public class RentalSubMenu {
 
         int option = 0;
 
+<<<<<<< Updated upstream
         do {
             String options = """
                     
@@ -141,6 +170,15 @@ public class RentalSubMenu {
             }
 
             PaymentMethod paymentMethod;
+=======
+        System.out.println("Informe a forma de pagamento: ");
+        System.out.println("1- PIX");
+        System.out.println("2- Cartão de Crédito");
+        System.out.println("3- Cartão de Débito");
+        System.out.println("4- Dinheiro");
+        int paymentMethodIndex = Integer.parseInt(scanner.nextLine());
+        PaymentMethod paymentMethod;
+>>>>>>> Stashed changes
 
         switch (paymentMethodIndex) {
             case 1:
@@ -187,6 +225,18 @@ public class RentalSubMenu {
             System.out.println(rental);
 
         } while (option != 4);
+    }
+
+    public void devolverVeículo(){
+        System.out.println("Digite o seu CPF ou CNPJ:");
+        String clientId = scanner.nextLine();
+        Client client = clientService.getClientById(clientId);
+
+        System.out.println("Digite a placa do Veículo que deseja realizar a devolução");
+        System.out.println(rentalService.findByClient(client));
+        String plate = scanner.nextLine();
+
+        rentalService.devolucaoVeiculo(client,plate);
     }
 }
 

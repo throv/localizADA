@@ -45,6 +45,13 @@ public class CarRentalApp {
         Client client1 = new NaturalPerson("Joao","lucas@gmail.com","1199773133","40156215810");
         clientService.createClient(client1);
 
+        Client client1= new NaturalPerson("Maria", "maria@gmail","12345678911");
+        Client client2= new LegalEntity("Maribel", "maribel@teste","11111111111111");
+        clientService.createClient(client1);
+        clientService.createClient(client2);
+
+        Vehicle vehicle1 = new VehicleCar("Uno", 2000, "ADA-2024", company1,true,2);
+
         Menu menu = new Menu(vehicleService,companyService,rentalService,clientService);
         menu.startMenu();
 

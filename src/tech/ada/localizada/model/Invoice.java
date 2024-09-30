@@ -48,4 +48,14 @@ public class Invoice {
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
+
+    @Override
+    public String toString() {
+        return "Invoice{" +
+                "finalPrice=" + finalPrice +
+                ", totalPrice=" + totalPrice +
+                ", discount=" + discount +
+                ", paymentMethod=" + paymentMethod +
+                '}';
+    }
 }

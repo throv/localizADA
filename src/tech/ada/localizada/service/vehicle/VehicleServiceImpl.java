@@ -51,6 +51,7 @@ public class VehicleServiceImpl implements VehicleService {
         vehicle.setModel(model);
     }
 
+
     @Override
     public void updateVehicleYear(Vehicle vehicle, int newYear) {
         vehicle.setYear(newYear);

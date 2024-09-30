@@ -27,6 +27,10 @@ public interface VehicleService {
 
     void updateModelVehicle(Vehicle vehicle, String model);
 
+<<<<<<< Updated upstream
     void printVehicles();
 
+=======
+    void updateVehiclePlate(String vehiclePlate);
+>>>>>>> Stashed changes
 }
