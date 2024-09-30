@@ -21,14 +21,18 @@ public class VehicleCar extends Vehicle {
 
     @Override
     public String toString() {
-        return "VehicleCar {" +
-                "ID: " + getId() + "\n" +
-                "Model: " + getModel() + "\n" +
-                "Year: " + getYear() + "\n" +
-                "Plate: " + getPlate() + "\n" +
-                "Rented: " + (isVehicleRented() ? "Yes" : "No") + "\n" +
-                "Number of Doors: " + numberOfDoors + "\n" +
-                '}';
+        String data = String.format("""
+
+                = ---------=== Dados do Carro ===---------
+                | Modelo: %s
+                | Ano: %s
+                | Placa: %s
+                | Alugado: %s
+                | Número de Portas: %s
+                = ----------------------------------------
+                """, getModel(), getYear(), getPlate(), (isVehicleRented() ? "Sim" : "Não"), numberOfDoors);
+
+        return data;
     }
 }
 

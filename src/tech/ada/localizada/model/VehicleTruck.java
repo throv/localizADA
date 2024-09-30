@@ -23,14 +23,13 @@ public class VehicleTruck extends Vehicle {
         String data = String.format("""
 
                 = -------=== Dados do Caminhão ===--------
-                | ID: %s
                 | Modelo: %s
                 | Ano: %s
                 | Placa: %s
                 | Alugado: %s
-                | Carga: %s
+                | Carga: %s toneladas
                 = ----------------------------------------
-                """, getId(), getModel(), getYear(), getPlate(), (isVehicleRented() ? "Sim" : "Não"), load);
+                """, getModel(), getYear(), getPlate(), (isVehicleRented() ? "Sim" : "Não"), load);
 
         return data;
     }

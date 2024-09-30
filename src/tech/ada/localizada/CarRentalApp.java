@@ -19,12 +19,15 @@ import tech.ada.localizada.view.Menu;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class CarRentalApp {
 
 
     public static void main(String[] args) {
+
+        Locale.setDefault(Locale.US);
 
         VehicleRepositoryImpl vehicleRepository = new VehicleRepositoryImpl();
         VehicleServiceImpl vehicleService = new VehicleServiceImpl(vehicleRepository);

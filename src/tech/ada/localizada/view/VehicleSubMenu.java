@@ -2,6 +2,8 @@ package tech.ada.localizada.view;
 
 import tech.ada.localizada.model.*;
 import tech.ada.localizada.service.vehicle.VehicleService;
+
+import java.util.Locale;
 import java.util.Scanner;
 
 public class VehicleSubMenu {
@@ -65,11 +67,14 @@ public class VehicleSubMenu {
                 case 5:
                     searchVehicle(vehicleService);
                     break;
+                case 6:
+                    System.out.println("\nSaindo");
+                    break;
                 default:
                     break;
             }
 
-        } while (option != 5);
+        } while (option != 6);
     }
 
     public void createVehicleSubMenu() {
@@ -82,9 +87,9 @@ public class VehicleSubMenu {
         scanner.nextLine();
 
         System.out.print("\nDigite a placa do carro: ");
-        String plate = scanner.nextLine();
+        String plate = scanner.nextLine().toUpperCase();
 
-        System.out.print("O carro está alugado? (true/false): ");
+        System.out.print("\nO carro está alugado? (true/false): ");
         boolean isRented = scanner.nextBoolean();
 
         int vehicleType = 0;
@@ -150,7 +155,7 @@ public class VehicleSubMenu {
 
         VehicleBike vehicleBike = new VehicleBike(model,year,plate,isRented);
         vehicleService.saveVehicle(vehicleBike);
-        System.out.println(vehicleService.listVehicle());
+        vehicleService.printVehicles();
         System.out.println("\nMOTO ADICIONADA COM SUCESSO!");
 
     }
@@ -162,7 +167,7 @@ public class VehicleSubMenu {
 
         VehicleTruck vehicleTruck = new VehicleTruck(model,year,plate,isRented,loadTruck);
         vehicleService.saveVehicle(vehicleTruck);
-        System.out.println(vehicleService.listVehicle());
+        vehicleService.printVehicles();
         System.out.println("\nCAMINHÃO ADICIONADO COM SUCESSO!");
     }
 
@@ -210,10 +215,10 @@ public class VehicleSubMenu {
                     updateVehicleYearMenu(vehicleService);
                     break;
                 case 4:
-                    System.out.println("Saindo...");
+                    System.out.println("\nSaindo...");
                     break;
                 default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                    break;
             }
 
         } while (option != 4);
@@ -242,7 +247,7 @@ public class VehicleSubMenu {
         Vehicle vehicle = getVehicleFromUserInput();
         //System.out.println(vehicle);
         System.out.print("\nDigite a nova placa do carro: ");
-        String newPlate = scanner.nextLine();
+        String newPlate = scanner.nextLine().toUpperCase();
         vehicleService.updateVehiclePlate(vehicle,newPlate);
         //System.out.println(vehicleService.listVehicle());
     }
@@ -259,6 +264,7 @@ public class VehicleSubMenu {
     public void deleteVehicle(VehicleService vehicleService) {
         Vehicle vehicle = getVehicleFromUserInput();
         vehicleService.deleteVehicle(vehicle.getId());
+        System.out.println("\nVEÍCULO EXCLUÍDO COM SUCESSO!");
         //System.out.println(vehicleService.listVehicle());
     }
 
@@ -269,7 +275,7 @@ public class VehicleSubMenu {
 
     public Vehicle getVehicleFromUserInput() {
         System.out.print("\nDigite a placa do carro: ");
-        String plate = scanner.nextLine();
+        String plate = scanner.nextLine().toUpperCase();
         return getVehiclebyPlate(plate);
     }
 
