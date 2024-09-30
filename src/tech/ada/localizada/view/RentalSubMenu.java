@@ -93,7 +93,7 @@ public class RentalSubMenu {
         //Realiza o aluguel
         vehicle.setVehicleRented(true);
         Rental rental = rentalService.createRental(vehicle, client, start, finish, companyWithdrawal, companyReturn, paymentMethod);
-        System.out.println(rental);
+        System.out.println(rental.comprovanteLocacao());
 
         //}
     }
@@ -246,12 +246,13 @@ public class RentalSubMenu {
         Rental rental = rentalService.devolucaoVeiculo(client, plate);
 
         System.out.println("O veículo " + rental.getVehicle().getModel() + " foi devolvido com sucesso.");
+        System.out.println(rental.comprovanteDevolução());
+
     }
 }
 
 
-// 30/10/2024 13:00
-// 05/11/2024 13:00
+
 
 
 
