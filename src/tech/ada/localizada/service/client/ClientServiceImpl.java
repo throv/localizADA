@@ -84,7 +84,7 @@ public class ClientServiceImpl implements ClientService {
     public Client getClientById(String id) {
         return clientRepository
                 .findById(id)
-                .orElseThrow(() -> new ClientNotFoundException("Client with ID " + id + " could not be found. No resources deleted."));
+                .orElseThrow(() -> new ClientNotFoundException("Client with ID " + id + " could not be found."));
     }
 
     @Override
