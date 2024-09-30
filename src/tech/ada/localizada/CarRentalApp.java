@@ -41,12 +41,14 @@ public class CarRentalApp {
 
         Company company1 = new Company ("Eldorado", "Rua Joao Pessoa, Nº 15", "Suzano","60949723000163");
         Company company2 = new Company("Salvador","Rua Jose Pedro Augusto Nº 255", "Mogi das Cruzes", "39710503000196");
+
         companyService.addCompany(company1);
         companyService.addCompany(company2);
 
         Vehicle vehicle1 = new VehicleCar("Uno", 1993,"THX-2020",false,4);
         Vehicle vehicle2 = new VehicleBike("Honda", 2023,"TEK-1234",false);
         Vehicle vehicle3 = new VehicleTruck("Caminhao",1999,"ABC-9999",false,2.8);
+
         vehicleService.saveVehicle(vehicle1);
         vehicleService.saveVehicle(vehicle2);
         vehicleService.saveVehicle(vehicle3);
@@ -54,31 +56,13 @@ public class CarRentalApp {
         company1.addVehicle(vehicle1);
         company1.addVehicle(vehicle3);
 
-        Client client1 = new NaturalPerson("Joao","lucas@gmail.com","11997731331","00123456789");
-        Client client2= new LegalEntity("Maribel", "maribel@teste","11111111111","60.949.724/0001-63");
+        Client client1 = new NaturalPerson("João Lucas","lucas@teste","11997731331","00123456789");
+        Client client2= new LegalEntity("Maria Isabel", "maribel@teste","11998126781","60949724000163");
+
         clientService.createClient(client1);
         clientService.createClient(client2);
 
-
-
         Menu menu = new Menu(vehicleService,companyService,rentalService,clientService);
         menu.startMenu();
-
-  /*    Scanner sc = new Scanner(System.in);
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-
-        System.out.println("Entre com os dados do aluguel");
-        System.out.println("Retirada ( dd/MM/yyy hh:mm): ");
-        LocalDateTime start = LocalDateTime.parse(sc.nextLine(),fmt);
-        System.out.println("Retorno ( dd/MM/yyy hh:mm): ");
-        LocalDateTime finish = LocalDateTime.parse(sc.nextLine(),fmt);
-
-        RentalService rs = new RentalService();
-
-        sc.close();
-  */
-
-        // 30/10/2024 13:00
-        // 05/11/2024 13:00
     }
 }
