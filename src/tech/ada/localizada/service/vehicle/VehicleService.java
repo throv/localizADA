@@ -8,7 +8,7 @@ public interface VehicleService {
 
     Vehicle saveVehicle(Vehicle vehicle);
 
-    void deleteVehicle(int id);
+    boolean deleteVehicle(int id);
 
     Vehicle getVehicleById(int id);
 

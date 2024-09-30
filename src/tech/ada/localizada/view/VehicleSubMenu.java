@@ -3,7 +3,7 @@ package tech.ada.localizada.view;
 import tech.ada.localizada.model.*;
 import tech.ada.localizada.service.vehicle.VehicleService;
 
-import java.util.Locale;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class VehicleSubMenu {
@@ -82,12 +82,44 @@ public class VehicleSubMenu {
         System.out.print("\nDigite o modelo do carro: ");
         String model = scanner.nextLine();
 
-        System.out.print("\nDigite o ano do carro: ");
-        int year = scanner.nextInt();
+        int year = 0;
+        boolean validInputYear = false;
+        while (!validInputYear) {
+            try {
+                System.out.print("\nDigite o ano do carro: ");
+                year = scanner.nextInt();
+                validInputYear = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Caracteres invalidos, digite apenas numeros");
+                scanner.nextLine();
+            }
+        }
+
         scanner.nextLine();
 
-        System.out.print("\nDigite a placa do carro: ");
-        String plate = scanner.nextLine().toUpperCase();
+        String plate = "0";
+        boolean validInputPlate = false;
+        while (!validInputPlate) {
+
+            System.out.print("\nDigite a placa do carro: ");
+            plate = scanner.nextLine().toUpperCase();
+
+            boolean plateExists = false;
+
+            for (Vehicle vehicle : vehicleService.listVehicle()) {
+                if (vehicle.getPlate().equalsIgnoreCase(plate)) {
+                    plateExists = true;
+                    break;
+                }
+            }
+
+            if (!plateExists) {
+                validInputPlate = true;
+            } else {
+                System.out.println("Placa já registrada. Tente novamente.");
+            }
+        }
+
 
         System.out.print("\nO carro está alugado? (true/false): ");
         boolean isRented = scanner.nextBoolean();
@@ -226,62 +258,72 @@ public class VehicleSubMenu {
 
     public void updateVehicleModelMenu(VehicleService vehicleService) {
         Vehicle vehicle = getVehicleFromUserInput();
-        //System.out.println(vehicle);
+        if (vehicle == null) {
+            System.out.println("\nVEÍCULO NÂO ENCONTRADO!");
+            return; }
         System.out.print("\nDigite o modelo do carro: ");
         String model = scanner.nextLine();
         vehicleService.updateModelVehicle(vehicle,model);
-        //System.out.println(vehicleService.listVehicle());
     }
 
     public void updateVehicleYearMenu(VehicleService vehicleService) {
         Vehicle vehicle = getVehicleFromUserInput();
-        //System.out.println(vehicle);
+        if (vehicle == null) {
+            System.out.println("\nVEÍCULO NÂO ENCONTRADO!");
+            return; }
         System.out.print("\nDigite o novo ano do carro: ");
         int newYear = Integer.parseInt(scanner.nextLine());
         vehicleService.updateVehicleYear(vehicle,newYear);
         vehicleService.listVehicle();
-        //System.out.println(vehicleService.listVehicle());
     }
 
     public void updateVehiclePlateMenu(VehicleService vehicleService) {
         Vehicle vehicle = getVehicleFromUserInput();
-        //System.out.println(vehicle);
+        if (vehicle == null) {
+            System.out.println("\nVEÍCULO NÂO ENCONTRADO!");
+            return; }
         System.out.print("\nDigite a nova placa do carro: ");
         String newPlate = scanner.nextLine().toUpperCase();
         vehicleService.updateVehiclePlate(vehicle,newPlate);
-        //System.out.println(vehicleService.listVehicle());
     }
 
     public void updateVehicleRented (VehicleService vehicleService) {
         Vehicle vehicle = getVehicleFromUserInput();
-        //System.out.println(vehicle);
+        if (vehicle == null) {
+            System.out.println("\nVEÍCULO NÂO ENCONTRADO!");
+            return; }
         System.out.print("\nDigite aqui é true ou false ? (true/false): ");
         boolean isRented = scanner.nextBoolean();
         vehicleService.updateVehicleRented(vehicle, isRented);
-        //System.out.println(vehicleService.listVehicle());
     }
 
     public void deleteVehicle(VehicleService vehicleService) {
         Vehicle vehicle = getVehicleFromUserInput();
+        if (vehicle == null) {
+            System.out.println("\nVEÍCULO NÂO ENCONTRADO!");
+            return; }
         vehicleService.deleteVehicle(vehicle.getId());
         System.out.println("\nVEÍCULO EXCLUÍDO COM SUCESSO!");
-        //System.out.println(vehicleService.listVehicle());
     }
 
     public void searchVehicle(VehicleService vehicleService) {
         Vehicle vehicle = getVehicleFromUserInput();
+        if (vehicle == null) {
+            System.out.println("\nVEÍCULO NÂO ENCONTRADO!");
+            return; }
         System.out.println(vehicle);
     }
 
     public Vehicle getVehicleFromUserInput() {
         System.out.print("\nDigite a placa do carro: ");
         String plate = scanner.nextLine().toUpperCase();
-        return getVehiclebyPlate(plate);
+        Vehicle vehicle = getVehiclebyPlate(plate);
+        return vehicle;
     }
 
     private Vehicle getVehiclebyPlate(String plate) {
         for (Vehicle vehicle : vehicleService.listVehicle()) {
-            if (vehicle.getPlate().equals(plate)) {
+            if (vehicle.getPlate().equalsIgnoreCase(plate)) {
                 return vehicle; }
         } return null;
     }
