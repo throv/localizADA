@@ -14,5 +14,6 @@ public interface CompanyService {
     Optional<Company> findCompanyByCNPJ(String cnpj);
     List<Company> getAllCompanies();
     void printCompanies();
-
+    void deleteCompany(int id);
+    List<Company> findCompaniesByNamePart(String namePart, CompanyService companyService);
 }

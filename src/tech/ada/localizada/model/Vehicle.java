@@ -6,17 +6,15 @@ public abstract class Vehicle {
     private int id;
     private String model;
     private int year;
-    private String plate;
-    private Company findVehicleAgency;
+    private String plate;;
     private boolean isVehicleRented;
 
-    protected Vehicle(String model, int year, String plate, Company findVehicleAgency,
+    protected Vehicle(String model, int year, String plate,
                    boolean isVehicleRented) {
         this.id = ++idCounter;
         this.model = model;
         this.year = year;
         this.plate = plate;
-        this.findVehicleAgency = findVehicleAgency;
         this.isVehicleRented = isVehicleRented;
     }
 
@@ -50,14 +48,6 @@ public abstract class Vehicle {
 
     public void setPlate(String plate) {
         this.plate = plate;
-    }
-
-    public Company getFindVehicleAgency() {
-        return findVehicleAgency;
-    }
-
-    public void setFindVehicleAgency(Company findVehicleAgency) {
-        this.findVehicleAgency = findVehicleAgency;
     }
 
     public boolean isVehicleRented() {

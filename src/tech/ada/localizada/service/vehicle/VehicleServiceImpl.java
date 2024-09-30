@@ -61,14 +61,19 @@ public class VehicleServiceImpl implements VehicleService {
         vehicle.setPlate(newPlate);
     }
 
-    @Override
+    /*@Override
     public void updateVehicleVehicleCompany(Vehicle vehicle, Company company) {
         vehicle.setFindVehicleAgency(company);
-    }
+    }*/
 
     @Override
     public void updateVehicleRented(Vehicle vehicle, boolean isRented) {
         vehicle.setVehicleRented(isRented);
+    }
+
+    @Override
+    public void updateVehicleVehicleCompany(Vehicle vehicle, Company company) {
+
     }
 
     @Override

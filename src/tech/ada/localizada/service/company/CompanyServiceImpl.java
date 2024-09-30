@@ -73,4 +73,16 @@ public class CompanyServiceImpl implements CompanyService {
             System.out.print(company);
         }
     }
+
+    @Override
+    public void deleteCompany(int id) {
+        this.companyRepository.delete(id);
+    }
+
+    @Override
+    public List<Company> findCompaniesByNamePart(String namePart, CompanyService companyService) {
+        return List.of();
+    }
+
+
 }

@@ -26,7 +26,7 @@ public class Menu {
         this.rentalService = rentalService;
         this.clientService = clientService;
 
-        this.vehicleSubMenu = new VehicleSubMenu(vehicleService, companyService);
+        this.vehicleSubMenu = new VehicleSubMenu(vehicleService);
         this.companySubMenu = new CompanySubMenu(companyService, vehicleService);
         this.rentalSubMenu = new RentalSubMenu(rentalService, clientService, vehicleService, companyService);
         this.clientSubMenu = new ClientSubMenu(clientService);
@@ -90,6 +90,28 @@ public class Menu {
                 default:
                     break;
             }
+                switch (option) {
+                    case 1:
+
+                        break;
+                    case 2:
+                        VehicleSubMenu vehicleSubMenu = new VehicleSubMenu (vehicleService);
+                        vehicleSubMenu.startMenuVehicle();
+                        break;
+                    case 3:
+                        CompanySubMenu companySubMenu = new CompanySubMenu(companyService, vehicleService);
+                        companySubMenu.showMenu();
+                        break;
+                    case 4:
+                        RentalSubMenu rentalSubMenu = new RentalSubMenu(rentalService,clientService,vehicleService,companyService);
+                        rentalSubMenu.showMenu();
+                        break;
+                    case 5:
+                        System.out.println("Leaving...");
+                        break;
+                    default:
+                        break;
+                }
 
         } while (option != 5);
     }

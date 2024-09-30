@@ -4,8 +4,9 @@ public class VehicleTruck extends Vehicle {
 
     private double load;
 
-    public VehicleTruck(String model, int year, String plate, Company findVehicleAgency, boolean isVehicleRented, double load) {
-        super(model, year, plate, findVehicleAgency, isVehicleRented);
+    public VehicleTruck(String model, int year, String plate,
+                        boolean isVehicleRented, double load) {
+        super(model, year, plate, isVehicleRented);
         this.load = load;
     }
 
@@ -30,7 +31,7 @@ public class VehicleTruck extends Vehicle {
                 | Alugado: %s
                 | Carga: %s
                 = ----------------------------------------
-                """, getId(), getModel(), getYear(), getPlate(), getFindVehicleAgency().getName(), (isVehicleRented() ? "Sim" : "Não"), load);
+                """, getId(), getModel(), getYear(), getPlate(), (isVehicleRented() ? "Sim" : "Não"), load);
 
         return data;
     }

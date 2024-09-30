@@ -4,10 +4,10 @@ public class VehicleCar extends Vehicle {
 
     private int numberOfDoors;
 
-    public VehicleCar (String model, int year, String plate, Company findVehicleAgency,
+    public VehicleCar (String model, int year, String plate,
                        boolean isVehicleRented, int numberOfDoors) {
 
-        super(model, year, plate, findVehicleAgency, isVehicleRented);
+        super(model, year, plate, isVehicleRented);
         this.numberOfDoors = numberOfDoors;
     }
 
@@ -21,20 +21,14 @@ public class VehicleCar extends Vehicle {
 
     @Override
     public String toString() {
-        String data = String.format("""
-
-                = --------=== Dados do Carro ===----------
-                | ID: %s
-                | Modelo: %s
-                | Ano: %s
-                | Placa: %s
-                | Agência: %s
-                | Alugado: %s
-                | Número de Portas: %s
-                = ----------------------------------------
-                """, getId(), getModel(), getYear(), getPlate(), getFindVehicleAgency().getName(), (isVehicleRented() ? "Sim" : "Não"), numberOfDoors);
-
-        return data;
+        return "VehicleCar {" +
+                "ID: " + getId() + "\n" +
+                "Model: " + getModel() + "\n" +
+                "Year: " + getYear() + "\n" +
+                "Plate: " + getPlate() + "\n" +
+                "Rented: " + (isVehicleRented() ? "Yes" : "No") + "\n" +
+                "Number of Doors: " + numberOfDoors + "\n" +
+                '}';
     }
 }
 

@@ -38,7 +38,7 @@ public class VehicleRepositoryImpl extends RepositoryImpl
 
     @Override
     public List<Vehicle> findByCompany(Company company) {
-        return getList().stream().filter(vehicle -> vehicle.getFindVehicleAgency().equals(company)).toList();
+        return List.of();
     }
 
 }

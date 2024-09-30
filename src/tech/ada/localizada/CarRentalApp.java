@@ -12,6 +12,7 @@ import tech.ada.localizada.service.client.ClientServiceImpl;
 import tech.ada.localizada.service.company.CompanyService;
 import tech.ada.localizada.service.company.CompanyServiceImpl;
 import tech.ada.localizada.service.rental.RentalService;
+import tech.ada.localizada.service.vehicle.VehicleService;
 import tech.ada.localizada.service.vehicle.VehicleServiceImpl;
 import tech.ada.localizada.view.ClientSubMenu;
 import tech.ada.localizada.view.Menu;
@@ -35,12 +36,14 @@ public class CarRentalApp {
         ClientService clientService = new ClientServiceImpl(new ClientRepositoryImpl());
         ClientSubMenu clientSubMenu = new ClientSubMenu(clientService);
 
-       // clientSubMenu.startMenuClient();
-
-        Company company1 = new Company ("Eldorado", "Rua Joao", "Suzao","123");
-        Company company2 = new Company("Salvaodr","Rua Jose", "Mogi", "456");
+        Company company1 = new Company ("Eldorado", "Rua Joao Pessoa, Nº 15", "Suzano","60.949.723/0001-63");
+        Company company2 = new Company("Salvador","Rua Jose Pedro Augusto Nº 255", "Mogi das Cruzes", "39.710.503/0001-96");
         companyService.addCompany(company1);
         companyService.addCompany(company2);
+        Vehicle vehicle1 = new VehicleCar("Uno", 1993,"THX-2020",false,4);
+        vehicleService.saveVehicle(vehicle1);
+        Client client1 = new NaturalPerson("Joao","lucas@gmail.com","1199773133","40156215810");
+        clientService.createClient(client1);
 
         Menu menu = new Menu(vehicleService,companyService,rentalService,clientService);
         menu.startMenu();

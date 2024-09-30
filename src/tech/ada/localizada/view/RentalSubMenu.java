@@ -85,7 +85,8 @@ public class RentalSubMenu {
         System.out.print("\nInforme a agência para a retirada do veículo: ");
         List<Company> companies = companyService.getAllCompanies();
         int companyIndex = Integer.parseInt(scanner.nextLine());
-        Company companyWithdraal = companies.get(companyIndex + 1);
+        Company companyWithdraal = companies.get(companyIndex);
+        scanner.nextLine();
 
         vehicleService.printVehicles();
         System.out.print("\nSelecione o veículo para a reserva: ");
@@ -96,7 +97,7 @@ public class RentalSubMenu {
         companyService.printCompanies();
         System.out.print("\nInforme a agência para a devolucão do veículo: ");
         companyIndex = Integer.parseInt(scanner.nextLine());
-        Company companyReturn = companies.get(companyIndex + 1);
+        Company companyReturn = companies.get(companyIndex);
 
         Scanner sc = new Scanner(System.in);
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -140,6 +141,29 @@ public class RentalSubMenu {
             }
 
             PaymentMethod paymentMethod;
+
+        switch (paymentMethodIndex) {
+            case 1:
+                paymentMethod = PaymentMethod.PIX;
+                break;
+            case 2:
+                paymentMethod = PaymentMethod.CARTAOCREDITO;
+                break;
+            case 3:
+                paymentMethod = PaymentMethod.CARTAODEBITO;
+                break;
+            case 4:
+                paymentMethod = PaymentMethod.DINHEIRO;
+                break;
+
+            default:
+                paymentMethod = PaymentMethod.PIX;
+        }
+
+        vehicle.setVehicleRented(true);
+        Rental rental = rentalService.createRental(vehicle, client, start, finish,
+                companyWithdraal, companyReturn, paymentMethod);
+        System.out.println(rental);
 
             switch (option) {
                 case 1:

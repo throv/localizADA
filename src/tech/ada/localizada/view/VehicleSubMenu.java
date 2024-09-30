@@ -1,21 +1,16 @@
 package tech.ada.localizada.view;
 
 import tech.ada.localizada.model.*;
-import tech.ada.localizada.service.company.CompanyService;
 import tech.ada.localizada.service.vehicle.VehicleService;
-import tech.ada.localizada.service.vehicle.VehicleServiceImpl;
-
 import java.util.Scanner;
 
 public class VehicleSubMenu {
 
     private final VehicleService vehicleService;
-    private final CompanyService companyService;
     private final Scanner scanner = new Scanner(System.in);
 
-    public VehicleSubMenu(VehicleService vehicleService, CompanyService companyService) {
+    public VehicleSubMenu(VehicleService vehicleService) {
         this.vehicleService = vehicleService;
-        this.companyService = companyService;
     }
 
     public void startMenuVehicle() {
@@ -34,7 +29,7 @@ public class VehicleSubMenu {
                     | 2 - Editar veículo                    |
                     | 3 - Excluir veículo                   |
                     | 4 - Mudar disponibilidade do veículo  |
-                    | 5 - Atualizar localização do veículo  |
+                    | 5 - Localizar Veiculo  |
                     | 6 - Sair                              |
                     = ------------------------------------- =
                     """;
@@ -68,16 +63,13 @@ public class VehicleSubMenu {
                     updateVehicleRented(vehicleService);
                     break;
                 case 5:
-                    updateVehicleCompanyMenu(vehicleService);
-                    break;
-                case 6:
-                    System.out.println("Saindo...");
+                    searchVehicle(vehicleService);
                     break;
                 default:
                     break;
             }
 
-        } while (option != 6);
+        } while (option != 5);
     }
 
     public void createVehicleSubMenu() {
@@ -92,16 +84,7 @@ public class VehicleSubMenu {
         System.out.print("\nDigite a placa do carro: ");
         String plate = scanner.nextLine();
 
-        companyService.printCompanies();
-
-        System.out.print("\nDigite o CNPJ da Companhia: ");
-        String cnpjCompany = scanner.nextLine();
-
-        Company company = getCompanyByCNPJ(cnpjCompany);
-
-        System.out.print(company);
-
-        System.out.print("\nO carro está alugado? (true/false): ");
+        System.out.print("O carro está alugado? (true/false): ");
         boolean isRented = scanner.nextBoolean();
 
         int vehicleType = 0;
@@ -137,13 +120,13 @@ public class VehicleSubMenu {
 
             switch (vehicleType) {
                 case 1:
-                    createVehicleCarSubMenu(model,year,plate,company,isRented);
+                    createVehicleCarSubMenu(model,year,plate,isRented);
                     break;
                 case 2:
-                    createVehicleBikeSubMenu(model,year,plate,company,isRented);
+                    createVehicleBikeSubMenu(model,year,plate,isRented);
                     break;
                 case 3:
-                    createVehicleTruckSubMenu(model,year,plate,company,isRented);
+                    createVehicleTruckSubMenu(model,year,plate,isRented);
                     break;
                 default:
                     break;
@@ -152,34 +135,32 @@ public class VehicleSubMenu {
         } while (vehicleType < 1 || vehicleType > 3);
     }
 
-    public void createVehicleCarSubMenu(String model, int year, String plate,
-                                        Company company, boolean isRented) {
+    public void createVehicleCarSubMenu(String model, int year,
+                                        String plate, boolean isRented) {
 
         System.out.print("\nDigite o número de portas do carro: ");
         int numberOfDoors = scanner.nextInt();
-        VehicleCar vehicleCar = new VehicleCar(model,year,plate,company,isRented,numberOfDoors);
+        VehicleCar vehicleCar = new VehicleCar(model,year,plate,isRented,numberOfDoors);
         vehicleService.saveVehicle(vehicleCar);
         vehicleService.printVehicles();
         System.out.println("\nCARRO ADICIONADO COM SUCESSO!");
     }
 
-    public void createVehicleBikeSubMenu(String model, int year,String plate,
-                                       Company company,boolean isRented) {
+    public void createVehicleBikeSubMenu(String model, int year,String plate,boolean isRented) {
 
-        VehicleBike vehicleBike = new VehicleBike(model,year,plate,company,isRented);
+        VehicleBike vehicleBike = new VehicleBike(model,year,plate,isRented);
         vehicleService.saveVehicle(vehicleBike);
         System.out.println(vehicleService.listVehicle());
         System.out.println("\nMOTO ADICIONADA COM SUCESSO!");
 
     }
 
-    public void createVehicleTruckSubMenu(String model, int year,String plate,
-                                        Company company,boolean isRented) {
+    public void createVehicleTruckSubMenu(String model, int year,String plate,boolean isRented) {
 
         System.out.print("\nLimite de carga do caminhão: ");
         double loadTruck = scanner.nextDouble();
 
-        VehicleTruck vehicleTruck = new VehicleTruck(model,year,plate,company,isRented,loadTruck);
+        VehicleTruck vehicleTruck = new VehicleTruck(model,year,plate,isRented,loadTruck);
         vehicleService.saveVehicle(vehicleTruck);
         System.out.println(vehicleService.listVehicle());
         System.out.println("\nCAMINHÃO ADICIONADO COM SUCESSO!");
@@ -266,17 +247,6 @@ public class VehicleSubMenu {
         //System.out.println(vehicleService.listVehicle());
     }
 
-    public void updateVehicleCompanyMenu(VehicleService vehicleService) {
-        Vehicle vehicle = getVehicleFromUserInput();
-        //System.out.println(vehicle);
-        System.out.println(companyService.getAllCompanies());
-        System.out.print("\nDigite o novo CNPJ da Companhia: ");
-        String newCnpjCompany = scanner.nextLine();
-        Company newCompany = getCompanyByCNPJ(newCnpjCompany);
-        vehicleService.updateVehicleVehicleCompany(vehicle,newCompany);
-        //System.out.println(vehicleService.listVehicle());
-    }
-
     public void updateVehicleRented (VehicleService vehicleService) {
         Vehicle vehicle = getVehicleFromUserInput();
         //System.out.println(vehicle);
@@ -292,6 +262,11 @@ public class VehicleSubMenu {
         //System.out.println(vehicleService.listVehicle());
     }
 
+    public void searchVehicle(VehicleService vehicleService) {
+        Vehicle vehicle = getVehicleFromUserInput();
+        System.out.println(vehicle);
+    }
+
     public Vehicle getVehicleFromUserInput() {
         System.out.print("\nDigite a placa do carro: ");
         String plate = scanner.nextLine();
@@ -305,12 +280,7 @@ public class VehicleSubMenu {
         } return null;
     }
 
-    private Company getCompanyByCNPJ(String cnpjCompany) {
-        for (Company company : companyService.getAllCompanies()) {
-            if (company.getCnpj().equals(cnpjCompany)) {
-                return company; }
-        } return null;
-    }
+
 
 
 
