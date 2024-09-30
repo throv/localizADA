@@ -73,7 +73,6 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void deleteClient(String id) {
 
-
         if (clientRepository.findById(id).isEmpty()) {
             throw new ClientNotFoundException("Client with ID " + id + " was not found.");
         }
@@ -85,12 +84,7 @@ public class ClientServiceImpl implements ClientService {
     public Client getClientById(String id) {
         return clientRepository
                 .findById(id)
-                .orElseThrow(() -> new ClientNotFoundException("Client with ID " + id + "could not be found. No resources deleted."));
-    }
-
-    @Override
-    public List<Client> listClients() {
-        return clientRepository.findAll();
+                .orElseThrow(() -> new ClientNotFoundException("Client with ID " + id + " could not be found."));
     }
 
     @Override
@@ -101,4 +95,8 @@ public class ClientServiceImpl implements ClientService {
         }
     }
 
+    @Override
+    public List<Client> searchClientByName(String name) {
+        return clientRepository.findByName(name);
+    }
 }

@@ -27,7 +27,7 @@ public class ClientRepositoryImpl extends RepositoryImpl<Client, String> impleme
 
         List<Client> result = new ArrayList<>();
         for (Client client : clientDb) {
-            if(client.getName().contains(name)) {
+            if(client.getName().toLowerCase().contains(name.toLowerCase())) {
                 result.add(client);
             }
         }
