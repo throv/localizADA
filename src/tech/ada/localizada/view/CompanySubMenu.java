@@ -179,31 +179,67 @@ public class CompanySubMenu {
     }
 
     public void updateCompanyName (CompanyService companyService) {
-        Company company = getCompanyFromUserInput().orElse(null);
+
+        Optional<Company> optCompany = getCompanyFromUserInput();
+
+        if (optCompany.isEmpty()) {
+            return;
+        }
+
+        Company company = optCompany.get();
         System.out.print("\nDigite o novo Nome: ");
         String name = scanner.nextLine();
-        company.setAddress(name);
+        company.setName(name);
+        companyService.updateCompany(company.getId(), company);
+        System.out.println("\nNome da empresa atualizado com sucesso.");
     }
 
     public void updateCompanyAndress (CompanyService companyService) {
-        Company company = getCompanyFromUserInput().orElse(null);
+        Optional<Company> optCompany = getCompanyFromUserInput();
+
+
+        if (optCompany.isEmpty()) {
+            return;
+        }
+
+        Company company = optCompany.get();
         System.out.print("\nDigite o novo endereço: ");
-        String anderess = scanner.nextLine();
-        company.setAddress(anderess);
+        String address = scanner.nextLine();
+        company.setAddress(address);
+        companyService.updateCompany(company.getId(), company);
+        System.out.println("\nEndereço da empresa atualizado com sucesso.");
     }
 
     public void updateCompanyCity (CompanyService companyService) {
-        Company company = getCompanyFromUserInput().orElse(null);
+
+        Optional<Company> optCompany = getCompanyFromUserInput();
+
+        if (optCompany.isEmpty()) {
+            return;
+        }
+
+        Company company = optCompany.get();
         System.out.print("\nDigite a nova Cidade: ");
-        String anderess = scanner.nextLine();
-        company.setCity(anderess);
+        String city = scanner.nextLine();
+        company.setCity(city);
+        companyService.updateCompany(company.getId(), company);
+        System.out.println("\nCidade da empresa atualizada com sucesso.");
     }
 
     public void updateCompanyCNPJ (CompanyService companyService) {
-        Company company = getCompanyFromUserInput().orElse(null);
+
+        Optional<Company> optCompany = getCompanyFromUserInput();
+
+        if (optCompany.isEmpty()) {
+            return;
+        }
+
+        Company company = optCompany.get();
         System.out.print("\nDigite o novo CNPJ: ");
         String cnpj = scanner.nextLine();
         company.setCnpj(cnpj);
+        companyService.updateCompany(company.getId(), company);
+        System.out.println("\nCNPJ da empresa atualizado com sucesso.");
     }
 
     public void deleteCompany () {
@@ -326,8 +362,13 @@ public class CompanySubMenu {
     }
 
     public void findCompanyCNPJ (CompanyService companyService) {
-        Optional <Company> company = getCompanyFromUserInput();
-        System.out.println(company);
+
+        Optional<Company> optCompany = getCompanyFromUserInput();
+
+        if (!optCompany.isEmpty()) {
+            Company company = optCompany.get();
+            System.out.println("\nCompany found: " + company);
+        }
     }
 
     public void findCompanyName(CompanyService companyService) {
@@ -362,8 +403,17 @@ public class CompanySubMenu {
     }
 
     public Optional <Company> getCompanyFromUserInput() {
+
         System.out.print("\nDigite o CNPJ da Empresa: ");
         String cnpj = scanner.nextLine();
-        return companyService.findCompanyByCNPJ(cnpj);
+
+        Optional<Company> optionalCompany = companyService.findCompanyByCNPJ(cnpj);
+
+        if (optionalCompany.isEmpty()) {
+            System.out.println("\nErro: Company with CNPJ " + cnpj + " was not found.");
+            return Optional.empty();
+        }
+
+        return optionalCompany;
     }
 }
