@@ -20,7 +20,7 @@ public class VehicleSubMenu {
 
     public void startMenuVehicle() {
 
-        int option;
+        int option = 0;
 
         do {
             String options = """
@@ -41,8 +41,18 @@ public class VehicleSubMenu {
 
             System.out.println(options);
             System.out.print("Escolha uma opção: ");
-            option = scanner.nextInt();
-            scanner.nextLine();
+
+            try {
+                option = Integer.parseInt(scanner.next());
+                scanner.nextLine();
+            } catch (NumberFormatException e) {
+                System.out.println("\nError: Please enter a valid option!");
+                continue;
+            }
+
+            if (option < 1 || option > 6) {
+                System.out.println("\nError: Please enter a valid option!");
+            }
 
             switch (option) {
                 case 1:
@@ -64,7 +74,7 @@ public class VehicleSubMenu {
                     System.out.println("Saindo...");
                     break;
                 default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                    break;
             }
 
         } while (option != 6);
@@ -94,12 +104,13 @@ public class VehicleSubMenu {
         System.out.print("\nO carro está alugado? (true/false): ");
         boolean isRented = scanner.nextBoolean();
 
-        int vehicleType;
+        int vehicleType = 0;
+
         do {
             String options = """
                     
                     = ------------------------------------- =
-                    |       Escolha o tipo de veículo?      |
+                    |             Tipo Veículo              |
                     = ------------------------------------- =
                     
                     = ----------=== Escolher ===----------- =
@@ -111,8 +122,18 @@ public class VehicleSubMenu {
 
             System.out.println(options);
             System.out.print("Escolha uma opção: ");
-            vehicleType = scanner.nextInt();
-            scanner.nextLine();
+
+            try {
+                vehicleType = Integer.parseInt(scanner.next());
+                scanner.nextLine();
+            } catch (NumberFormatException e) {
+                System.out.println("\nError: Please enter a valid option!");
+                continue;
+            }
+
+            if (vehicleType < 1 || vehicleType > 3) {
+                System.out.println("\nError: Please enter a valid option!");
+            }
 
             switch (vehicleType) {
                 case 1:
@@ -125,6 +146,7 @@ public class VehicleSubMenu {
                     createVehicleTruckSubMenu(model,year,plate,company,isRented);
                     break;
                 default:
+                    break;
             }
 
         } while (vehicleType < 1 || vehicleType > 3);
@@ -165,29 +187,38 @@ public class VehicleSubMenu {
 
     public void updateVehicleSubMenu() {
 
-        int opcao;
+        int option = 0;
 
         do {
             String options = """
 
                     = ------------------------------------- =
-                    |     Qual informação deseja editar?    |
+                    |           Editar Informação           |
                     = ------------------------------------- =
                     
                     = -----------=== Editar ===------------ =
-                    | 1 - Modelo do Veículo                 |
-                    | 2 - Placa do Veículo                  |
-                    | 3 - Ano do Veículo                    |
+                    | 1 - Modelo do veículo                 |
+                    | 2 - Placa do veículo                  |
+                    | 3 - Ano do veículo                    |
                     | 4 - Voltar                            |
                     = ------------------------------------- =
                     """;
 
             System.out.println(options);
             System.out.print("Escolha uma opção: ");
-            opcao = scanner.nextInt();
-            scanner.nextLine();
 
-            switch (opcao) {
+            try {
+                option = Integer.parseInt(scanner.next());
+                scanner.nextLine();
+            } catch (NumberFormatException e) {
+                System.out.println("\nError: Please enter a valid option!");
+                continue;
+            }
+
+            if (option < 1 || option > 4) {
+                System.out.println("\nError: Please enter a valid option!");
+            }
+            switch (option) {
                 case 1:
                     updateVehicleModelMenu(vehicleService);
                     break;
@@ -204,7 +235,7 @@ public class VehicleSubMenu {
                     System.out.println("Opção inválida. Tente novamente.");
             }
 
-        } while (opcao != 4);
+        } while (option != 4);
     }
 
     public void updateVehicleModelMenu(VehicleService vehicleService) {

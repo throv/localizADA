@@ -76,7 +76,7 @@ public class Company {
     @Override
     public String toString() {
         String data = String.format("""
-
+                
                 = --------=== Dados da Agência ===----------
                 | ID: %s
                 | Nome: %s

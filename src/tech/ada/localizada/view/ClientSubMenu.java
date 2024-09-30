@@ -33,7 +33,7 @@ public class ClientSubMenu {
                     | 2 - Alterar cliente                   |
                     | 3 - Excluir cliente                   |
                     | 4 - Buscar cliente                    |
-                    | 5 - Listar clientes                    |
+                    | 5 - Listar clientes                   |
                     | 6 - Sair                              |
                     = ------------------------------------- =
                     """;
@@ -74,7 +74,7 @@ public class ClientSubMenu {
                     System.out.println("Saindo...");
                     break;
                 default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                    break;
             }
 
         } while (option != 6);
@@ -125,7 +125,7 @@ public class ClientSubMenu {
                     System.out.println("Saindo...");
                     break;
                 default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                    break;
             }
 
         } while (option != 3);
@@ -238,6 +238,7 @@ public class ClientSubMenu {
     }
 
     public void deleteClientSubMenu() {
+
         clientService.printClients();
         System.out.print("\nDigite o CPF/CNPJ do cliente que deseja excluir: ");
         String cpfOrCnpj = Util.validateCnpjAndCpf(scanner.nextLine());
@@ -254,6 +255,7 @@ public class ClientSubMenu {
     }
 
     public void searchClientSubMenu() {
+
         System.out.print("\nDigite o CPF/CNPJ do cliente que deseja buscar: ");
         String cpfOrCnpj = Util.validateCnpjAndCpf(scanner.nextLine());
 
@@ -264,10 +266,62 @@ public class ClientSubMenu {
             return;
         }
 
+        System.out.println("\nCliente encontrado:");
         System.out.println(client);
     }
 
     public void listClientsSubMenu() {
         clientService.printClients();
     }
+
+    //    public void searchClientSubMenu() {
+//
+//        int option = 0;
+//
+//        do {
+//            String options = """
+//
+//                    = ------------------------------------- =
+//                    |             Menu Cliente              |
+//                    = ------------------------------------- =
+//
+//                    = -----------=== Buscar ===------------ =
+//                    | 1 - Documento                         |
+//                    | 2 - Nome                              |
+//                    | 3 - Sair                              |
+//                    = ------------------------------------- =
+//                    """;
+//
+//            System.out.println(options);
+//            System.out.print("Escolha uma opção: ");
+//            String optionString = scanner.next();
+//
+//            try {
+//                option = Integer.parseInt(optionString);
+//                scanner.nextLine();
+//            } catch (NumberFormatException e) {
+//                System.out.println("\nError: Please enter a valid option!");
+//                continue;
+//            }
+//
+//            if (option < 1 || option > 3) {
+//                System.out.println("\nError: Please enter a valid option!");
+//            }
+//
+//            switch (option) {
+//                case 1:
+//                    //searchClientByDocument();
+//                    break;
+//                case 2:
+//                    //searchClientByName();
+//                    break;
+//                case 3:
+//                    System.out.println("Saindo...");
+//                    break;
+//                default:
+//                    break;
+//            }
+//
+//        } while (option != 3);
+//    }
 }

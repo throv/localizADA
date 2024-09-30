@@ -9,7 +9,6 @@ import tech.ada.localizada.repository.client.ClientRepository;
 import java.util.List;
 import java.util.Optional;
 
-
 public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
@@ -40,7 +39,6 @@ public class ClientServiceImpl implements ClientService {
         }
     }
 
-
     @Override
     public Client createClient(Client client) {
 
@@ -69,7 +67,6 @@ public class ClientServiceImpl implements ClientService {
         existingClient.setEmail(client.getEmail());
         existingClient.setDocument(client.getId());
 
-
         return clientRepository.save(existingClient);
     }
 
@@ -80,7 +77,6 @@ public class ClientServiceImpl implements ClientService {
         if (clientRepository.findById(id).isEmpty()) {
             throw new ClientNotFoundException("Client with ID " + id + " was not found.");
         }
-
 
         clientRepository.delete(id);
     }

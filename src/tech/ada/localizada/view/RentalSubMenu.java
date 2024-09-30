@@ -15,7 +15,6 @@ public class RentalSubMenu {
     private RentalService rentalService;
 
 
-
     static Scanner scanner = new Scanner(System.in);
     ClientService clientService;
     VehicleService vehicleService;
@@ -31,16 +30,35 @@ public class RentalSubMenu {
 
     public void showMenu() {
 
-        int option;
+        int option = 0;
 
         do {
-            System.out.println("Menu:");
-            System.out.println("1 - Alugar Veículo");
-            System.out.println("2 - Sair");
+            String options = """
+                                        
+                    = ------------------------------------- =
+                    |              Menu Aluguel             |
+                    = ------------------------------------- =
+                                        
+                    = -------------=== Menu ===------------ =
+                    | 1 - Alugar veículo                    |
+                    | 2 - Sair                              |
+                    = ------------------------------------- =
+                    """;
+
+            System.out.println(options);
             System.out.print("Escolha uma opção: ");
 
-            option = scanner.nextInt();
-            scanner.nextLine();
+            try {
+                option = Integer.parseInt(scanner.next());
+                scanner.nextLine();
+            } catch (NumberFormatException e) {
+                System.out.println("\nError: Please enter a valid option!");
+                continue;
+            }
+
+            if (option < 1 || option > 2) {
+                System.out.println("\nError: Please enter a valid option!");
+            }
 
             switch (option) {
                 case 1:
@@ -51,7 +69,7 @@ public class RentalSubMenu {
                     System.out.println("Saindo...");
                     break;
                 default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                    break;
             }
 
         } while (option != 2);
@@ -59,69 +77,92 @@ public class RentalSubMenu {
 
     public void createRentalSubMenu() {
 
-        System.out.print("Informe o seu CPF: ");
+        System.out.print("\nInforme o seu CPF: ");
         String clientId = scanner.nextLine();
         Client client = clientService.getClientById(clientId);
 
-        System.out.print("Informe a Agência para a retirada do veículo:  ");
+        companyService.printCompanies();
+        System.out.print("\nInforme a agência para a retirada do veículo: ");
         List<Company> companies = companyService.getAllCompanies();
-        System.out.println(companies);
         int companyIndex = Integer.parseInt(scanner.nextLine());
         Company companyWithdraal = companies.get(companyIndex + 1);
 
-
-        System.out.print("Selecione o veículo para a reserva: ");
+        vehicleService.printVehicles();
+        System.out.print("\nSelecione o veículo para a reserva: ");
         List<Vehicle> vehicles = vehicleService.listVehicleByCompany(companyWithdraal);
-        System.out.println(vehicles);
         int vehiclesIndex = Integer.parseInt(scanner.nextLine());
         Vehicle vehicle = vehicles.get(vehiclesIndex + 1);
 
-
-        System.out.print("Informe a Agência para a devolucão do veículo: ");
-        System.out.println(companies);
+        companyService.printCompanies();
+        System.out.print("\nInforme a agência para a devolucão do veículo: ");
         companyIndex = Integer.parseInt(scanner.nextLine());
         Company companyReturn = companies.get(companyIndex + 1);
-
 
         Scanner sc = new Scanner(System.in);
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-        System.out.println("Digite a data de retirada ( dd/MM/yyy hh:mm): ");
+        System.out.println("\nDigite a data de retirada ( dd/MM/yyy hh:mm ): ");
         LocalDateTime start = LocalDateTime.parse(sc.nextLine(), fmt);
-        System.out.println("Digite a data de devolução ( dd/MM/yyy hh:mm): ");
+        System.out.println("\nDigite a data de devolução ( dd/MM/yyy hh:mm ): ");
         LocalDateTime finish = LocalDateTime.parse(sc.nextLine(), fmt);
         fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
+        int option = 0;
 
-        System.out.print("Informe a forma de pagamento: ");
-        System.out.println("1- PIX");
-        System.out.println("2- Cartão de Crédito");
-        System.out.println("3- Cartão de Débito");
-        System.out.println("4- Dinheiro");
-        int paymentMethodIndex = Integer.parseInt(scanner.nextLine());
-        PaymentMethod paymentMethod;
+        do {
+            String options = """
+                    
+                    = ------------------------------------- =
+                    |           Forma de Pagamento          |
+                    = ------------------------------------- =
+                    
+                    = ----------=== Pagamento ===---------- =
+                    | 1 - Pix                               |
+                    | 2 - Cartão de Crédito                 |
+                    | 3 - Cartão de Débito                  |
+                    | 4 - Dinheiro                          |
+                    = ------------------------------------- =
+                    """;
 
-        switch (paymentMethodIndex) {
-            case 1:
-                paymentMethod = PaymentMethod.PIX;
-                break;
-            case 2:
-                paymentMethod = PaymentMethod.CARTAOCREDITO;
-                break;
-            case 3:
-                paymentMethod = PaymentMethod.CARTAODEBITO;
-                break;
-            case 4:
-                paymentMethod = PaymentMethod.DINHEIRO;
-                break;
+            System.out.println(options);
+            System.out.print("Escolha uma opção: ");
 
-            default:
-                paymentMethod = PaymentMethod.PIX;
-        }
+            try {
+                option = Integer.parseInt(scanner.next());
+                scanner.nextLine();
+            } catch (NumberFormatException e) {
+                System.out.println("\nError: Please enter a valid option!");
+                continue;
+            }
 
+            if (option < 1 || option > 4) {
+                System.out.println("\nError: Please enter a valid option!");
+            }
 
-        Rental rental = rentalService.createRental(vehicle, client, start, finish, companyWithdraal, companyReturn, paymentMethod);
-        System.out.println(rental);
+            PaymentMethod paymentMethod;
+
+            switch (option) {
+                case 1:
+                    paymentMethod = PaymentMethod.PIX;
+                    break;
+                case 2:
+                    paymentMethod = PaymentMethod.CARTAOCREDITO;
+                    break;
+                case 3:
+                    paymentMethod = PaymentMethod.CARTAODEBITO;
+                    break;
+                case 4:
+                    paymentMethod = PaymentMethod.DINHEIRO;
+                    break;
+                default:
+                    paymentMethod = PaymentMethod.PIX;
+                    break;
+            }
+
+            Rental rental = rentalService.createRental(vehicle, client, start, finish, companyWithdraal, companyReturn, paymentMethod);
+            System.out.println(rental);
+
+        } while (option != 4);
     }
 }
 
