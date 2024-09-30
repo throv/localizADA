@@ -29,7 +29,7 @@ public class VehicleSubMenu {
                     | 2 - Editar veículo                    |
                     | 3 - Excluir veículo                   |
                     | 4 - Mudar disponibilidade do veículo  |
-                    | 5 - Localizar Veiculo  |
+                    | 5 - Localizar Veiculo                 |
                     | 6 - Sair                              |
                     = ------------------------------------- =
                     """;

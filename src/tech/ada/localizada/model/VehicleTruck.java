@@ -27,7 +27,6 @@ public class VehicleTruck extends Vehicle {
                 | Modelo: %s
                 | Ano: %s
                 | Placa: %s
-                | Agência: %s
                 | Alugado: %s
                 | Carga: %s
                 = ----------------------------------------

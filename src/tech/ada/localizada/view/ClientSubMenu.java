@@ -79,7 +79,7 @@ public class ClientSubMenu {
                     listClientsSubMenu();
                     break;
                 case 7:
-                    System.out.println("Saindo...");
+                    System.out.println("\nSaindo...");
                     break;
                 default:
                     break;
@@ -130,7 +130,7 @@ public class ClientSubMenu {
                     createClientLEMenu();
                     break;
                 case 3:
-                    System.out.println("Saindo...");
+                    System.out.println("\nSaindo...");
                     break;
                 default:
                     break;
@@ -158,9 +158,9 @@ public class ClientSubMenu {
             clientService.createClient(naturalPerson);
             System.out.println("\nCLIENTE (PESSOA FÍSICA) ADICIONADO COM SUCESSO!");
         } catch (ClientAlreadyExistsException e)  {
-            System.out.println("Erro: " + e.getMessage());
+            System.out.println("\nErro: " + e.getMessage());
         } catch (IllegalArgumentException | DocumentNotAcceptedException e) {
-            System.out.println("Erro de validação: " + e.getMessage());
+            System.out.println("\nErro de validação: " + e.getMessage());
         }
     }
 
@@ -183,9 +183,9 @@ public class ClientSubMenu {
             clientService.createClient(legalEntity);
             System.out.println("\nCLIENTE (PESSOA JURÍDICA) ADICIONADO COM SUCESSO!");
         } catch (ClientAlreadyExistsException e) {
-            System.out.println("Erro: " + e.getMessage());
+            System.out.println("\nErro: " + e.getMessage());
         } catch (IllegalArgumentException | DocumentNotAcceptedException e) {
-            System.out.println("Erro de validação: " + e.getMessage());
+            System.out.println("\nErro de validação: " + e.getMessage());
         }
     }
 
@@ -206,7 +206,7 @@ public class ClientSubMenu {
                 System.out.println("\nTipo de cliente desconhecido.");
             }
         } catch (ClientNotFoundException e) {
-            System.out.println("Erro: " + e.getMessage());
+            System.out.println("\nErro: " + e.getMessage());
         }
     }
 
@@ -233,7 +233,7 @@ public class ClientSubMenu {
             clientService.updateClient(client.getId(), client);
             System.out.println("\nCLIENTE (PESSOA FÍSICA) ATUALIZADO COM SUCESSO!");
         } catch (IllegalArgumentException | DocumentNotAcceptedException e) {
-            System.out.println("Erro de validação: " + e.getMessage());
+            System.out.println("\nErro de validação: " + e.getMessage());
         }
 
     }
@@ -261,7 +261,7 @@ public class ClientSubMenu {
             clientService.updateClient(client.getId(), client);
             System.out.println("\nCLIENTE (PESSOA JURÍDICA) ATUALIZADO COM SUCESSO!");
         } catch (IllegalArgumentException | DocumentNotAcceptedException e) {
-            System.out.println("Erro de validação: " + e.getMessage());
+            System.out.println("\nErro de validação: " + e.getMessage());
         }
     }
 
@@ -282,7 +282,7 @@ public class ClientSubMenu {
             clientService.deleteClient(client.getId());
             System.out.println("\nCLIENTE EXCLUÍDO COM SUCESSO!");
         } catch (ClientNotFoundException e) {
-            System.out.println("Erro: " + e.getMessage());
+            System.out.println("\nErro: " + e.getMessage());
         }
     }
 
@@ -296,25 +296,25 @@ public class ClientSubMenu {
             System.out.println("\nCliente encontrado:");
             System.out.println(client);
         } catch (ClientNotFoundException e) {
-            System.out.println("Erro: " + e.getMessage());
+            System.out.println("\nErro: " + e.getMessage());
         }
     }
 
     private void searchClientByName() {
-        System.out.print("Digite o nome que deseja buscar: ");
+        System.out.print("\nDigite o nome que deseja buscar: ");
         String name = scanner.nextLine().trim();
 
         if (name.isEmpty()) {
-            System.out.println("Erro: O nome não pode estar vazio.");
+            System.out.println("\nErro: O nome não pode estar vazio.");
             return;
         }
 
         List<Client> clients = clientService.searchClientByName(name);
 
         if (clients.isEmpty()) {
-            System.out.println("Nenhum cliente encontrado com o nome: " + name);
+            System.out.println("\nNenhum cliente encontrado com o nome: " + name);
         } else {
-            System.out.println("Clientes encontrados:");
+            System.out.println("\nClientes encontrados:");
             for (Client client : clients) {
                 System.out.println(client);
             }
@@ -324,55 +324,4 @@ public class ClientSubMenu {
     public void listClientsSubMenu() {
         clientService.printClients();
     }
-
-    //    public void searchClientSubMenu() {
-//
-//        int option = 0;
-//
-//        do {
-//            String options = """
-//
-//                    = ------------------------------------- =
-//                    |             Menu Cliente              |
-//                    = ------------------------------------- =
-//
-//                    = -----------=== Buscar ===------------ =
-//                    | 1 - Documento                         |
-//                    | 2 - Nome                              |
-//                    | 3 - Sair                              |
-//                    = ------------------------------------- =
-//                    """;
-//
-//            System.out.println(options);
-//            System.out.print("Escolha uma opção: ");
-//            String optionString = scanner.next();
-//
-//            try {
-//                option = Integer.parseInt(optionString);
-//                scanner.nextLine();
-//            } catch (NumberFormatException e) {
-//                System.out.println("\nError: Please enter a valid option!");
-//                continue;
-//            }
-//
-//            if (option < 1 || option > 3) {
-//                System.out.println("\nError: Please enter a valid option!");
-//            }
-//
-//            switch (option) {
-//                case 1:
-//                    //searchClientByDocument();
-//                    break;
-//                case 2:
-//                    //searchClientByName();
-//                    break;
-//                case 3:
-//                    System.out.println("Saindo...");
-//                    break;
-//                default:
-//                    break;
-//            }
-//
-//        } while (option != 3);
-//    }
 }

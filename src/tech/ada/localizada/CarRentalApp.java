@@ -40,13 +40,20 @@ public class CarRentalApp {
         Company company2 = new Company("Salvador","Rua Jose Pedro Augusto Nº 255", "Mogi das Cruzes", "39.710.503/0001-96");
         companyService.addCompany(company1);
         companyService.addCompany(company2);
-        Vehicle vehicle1 = new VehicleCar("Uno", 1993,"THX-2020",false,4);
-        vehicleService.saveVehicle(vehicle1);
 
-        Client client1 = new NaturalPerson("Joao","lucas@gmail.com","1199773133","003.888.789-70");
-        Client client2= new LegalEntity("Maribel", "maribel@teste","11111111111","60.949.724/0001-63");
+        Vehicle vehicle1 = new VehicleCar("Uno", 1993,"THX-2020",false,4);
+        Vehicle vehicle2 = new VehicleBike("Honda", 2023,"TEK-1234",false);
+        Vehicle vehicle3 = new VehicleTruck("Caminhao",1999,"ABC-9999",false,2.8);
+        vehicleService.saveVehicle(vehicle1);
+        vehicleService.saveVehicle(vehicle2);
+        vehicleService.saveVehicle(vehicle3);
+
+        company1.addVehicle(vehicle1);
+
+        Client client1 = new NaturalPerson("Joao","lucas@gmail.com","1199773133","00123456789");
+//        Client client2= new LegalEntity("Maribel", "maribel@teste","11111111111","60.949.724/0001-63");
         clientService.createClient(client1);
-        clientService.createClient(client2);
+//        clientService.createClient(client2);
 
 
 
