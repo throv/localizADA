@@ -25,15 +25,17 @@ public class CarRentalApp {
 
     public static void main(String[] args) {
 
-
         VehicleRepositoryImpl vehicleRepository = new VehicleRepositoryImpl();
         VehicleServiceImpl vehicleService = new VehicleServiceImpl(vehicleRepository);
         CompanyRepositoryImpl companyRepository = new CompanyRepositoryImpl();
         CompanyServiceImpl companyService = new CompanyServiceImpl(companyRepository);
         RentalRepositoryImpl rentalRepository = new RentalRepositoryImpl();
         RentalService rentalService = new RentalService();
-        ClientRepository clientRepository = new ClientRepositoryImpl();
-        ClientService clientService = new ClientServiceImpl(clientRepository);
+
+        ClientService clientService = new ClientServiceImpl(new ClientRepositoryImpl());
+        ClientSubMenu clientSubMenu = new ClientSubMenu(clientService);
+
+       // clientSubMenu.startMenuClient();
 
         Company company1 = new Company ("Eldorado", "Rua Joao", "Suzao","123");
         Company company2 = new Company("Salvaodr","Rua Jose", "Mogi", "456");
@@ -43,7 +45,7 @@ public class CarRentalApp {
         Menu menu = new Menu(vehicleService,companyService,rentalService,clientService);
         menu.startMenu();
 
-  /*      Scanner sc = new Scanner(System.in);
+  /*    Scanner sc = new Scanner(System.in);
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
         System.out.println("Entre com os dados do aluguel");
@@ -52,11 +54,7 @@ public class CarRentalApp {
         System.out.println("Retorno ( dd/MM/yyy hh:mm): ");
         LocalDateTime finish = LocalDateTime.parse(sc.nextLine(),fmt);
 
-
-
         RentalService rs = new RentalService();
-
-
 
         sc.close();
   */
