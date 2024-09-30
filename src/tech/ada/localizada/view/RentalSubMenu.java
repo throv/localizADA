@@ -41,7 +41,8 @@ public class RentalSubMenu {
                                         
                     = -------------=== Menu ===------------ =
                     | 1 - Alugar veículo                    |
-                    | 2 - Sair                              |
+                    | 2 - Devolver veículo                  |
+                    | 3 - Sair                              |
                     = ------------------------------------- =
                     """;
 
@@ -56,7 +57,7 @@ public class RentalSubMenu {
                 continue;
             }
 
-            if (option < 1 || option > 2) {
+            if (option < 1 || option > 3) {
                 System.out.println("\nError: Please enter a valid option!");
             }
 
@@ -64,20 +65,22 @@ public class RentalSubMenu {
                 case 1:
                     createRentalSubMenu();
                     break;
-
                 case 2:
+                    System.out.println("Devolução");
+                    devolverVeiculo();
+                case 3:
                     System.out.println("Saindo...");
                     break;
                 default:
                     break;
             }
 
-        } while (option != 2);
+        } while (option != 3);
     }
 
     public void createRentalSubMenu() {
 
-        System.out.print("\nInforme o seu CPF: ");
+        System.out.print("Informe o seu CPF ou CNPJ: ");
         String clientId = scanner.nextLine();
         Client client = clientService.getClientById(clientId);
 
@@ -86,18 +89,18 @@ public class RentalSubMenu {
         List<Company> companies = companyService.getAllCompanies();
         int companyIndex = Integer.parseInt(scanner.nextLine());
         Company companyWithdraal = companies.get(companyIndex);
-        scanner.nextLine();
 
-        vehicleService.printVehicles();
-        System.out.print("\nSelecione o veículo para a reserva: ");
-        List<Vehicle> vehicles = vehicleService.listVehicleByCompany(companyWithdraal);
-        int vehiclesIndex = Integer.parseInt(scanner.nextLine());
-        Vehicle vehicle = vehicles.get(vehiclesIndex + 1);
+
+        System.out.print("Selecione o veículo para a reserva: ");
+        System.out.println(vehicleService.listVehicle());
+        String vehiclePlate = (scanner.nextLine());
+        Vehicle vehicle = vehicleService.getVehicleByPlate(vehiclePlate);
 
         companyService.printCompanies();
         System.out.print("\nInforme a agência para a devolucão do veículo: ");
         companyIndex = Integer.parseInt(scanner.nextLine());
         Company companyReturn = companies.get(companyIndex);
+
 
         Scanner sc = new Scanner(System.in);
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -112,11 +115,11 @@ public class RentalSubMenu {
 
         do {
             String options = """
-                    
+                                        
                     = ------------------------------------- =
                     |           Forma de Pagamento          |
                     = ------------------------------------- =
-                    
+                                        
                     = ----------=== Pagamento ===---------- =
                     | 1 - Pix                               |
                     | 2 - Cartão de Crédito                 |
@@ -140,53 +143,34 @@ public class RentalSubMenu {
                 System.out.println("\nError: Please enter a valid option!");
             }
 
-            PaymentMethod paymentMethod;
+            PaymentMethod paymentMethod = switch (option) {
+                case 1 -> PaymentMethod.PIX;
+                case 2 -> PaymentMethod.CARTAOCREDITO;
+                case 3 -> PaymentMethod.CARTAODEBITO;
+                case 4 -> PaymentMethod.DINHEIRO;
+                default -> PaymentMethod.PIX;
+            };
 
-        switch (paymentMethodIndex) {
-            case 1:
-                paymentMethod = PaymentMethod.PIX;
-                break;
-            case 2:
-                paymentMethod = PaymentMethod.CARTAOCREDITO;
-                break;
-            case 3:
-                paymentMethod = PaymentMethod.CARTAODEBITO;
-                break;
-            case 4:
-                paymentMethod = PaymentMethod.DINHEIRO;
-                break;
-
-            default:
-                paymentMethod = PaymentMethod.PIX;
-        }
-
-        vehicle.setVehicleRented(true);
-        Rental rental = rentalService.createRental(vehicle, client, start, finish,
-                companyWithdraal, companyReturn, paymentMethod);
-        System.out.println(rental);
-
-            switch (option) {
-                case 1:
-                    paymentMethod = PaymentMethod.PIX;
-                    break;
-                case 2:
-                    paymentMethod = PaymentMethod.CARTAOCREDITO;
-                    break;
-                case 3:
-                    paymentMethod = PaymentMethod.CARTAODEBITO;
-                    break;
-                case 4:
-                    paymentMethod = PaymentMethod.DINHEIRO;
-                    break;
-                default:
-                    paymentMethod = PaymentMethod.PIX;
-                    break;
-            }
+            vehicle.setVehicleRented(true);
 
             Rental rental = rentalService.createRental(vehicle, client, start, finish, companyWithdraal, companyReturn, paymentMethod);
             System.out.println(rental);
 
         } while (option != 4);
+    }
+
+    public void devolverVeiculo() {
+        System.out.println("Digite o seu CPF ou CNPJ:");
+        String clientId = scanner.nextLine();
+        Client client = clientService.getClientById(clientId);
+
+        System.out.println("Digite a placa do Veículo que deseja realizar a devolução");
+        System.out.println(rentalService.findByClient(client));
+        String plate = scanner.nextLine();
+
+        Rental rental = rentalService.devolucaoVeiculo(client, plate);
+
+        System.out.println("O veículo " + rental.getVehicle().getModel() + " foi devolvido com sucesso.");
     }
 }
 

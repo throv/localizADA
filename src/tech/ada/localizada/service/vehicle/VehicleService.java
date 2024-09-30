@@ -29,4 +29,5 @@ public interface VehicleService {
 
     void printVehicles();
 
+    void updateVehiclePlate(String vehiclePlate);
 }
