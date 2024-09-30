@@ -6,6 +6,7 @@ import tech.ada.localizada.service.client.ClientService;
 import tech.ada.localizada.service.company.CompanyService;
 import tech.ada.localizada.service.rental.RentalService;
 import tech.ada.localizada.service.vehicle.VehicleService;
+import tech.ada.localizada.view.ClientSubMenu;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,10 +18,13 @@ public class RentalSubMenu {
     private RentalService rentalService;
 
 
+
     static Scanner scanner = new Scanner(System.in);
     ClientService clientService;
     VehicleService vehicleService;
     CompanyService companyService;
+
+    ClientSubMenu createClientMenu;
 
     //Principio I - SOLID
     public RentalSubMenu(RentalService rentalService, ClientService clientService, VehicleService vehicleService, CompanyService companyService) {
@@ -28,6 +32,7 @@ public class RentalSubMenu {
         this.clientService = clientService;
         this.vehicleService = vehicleService;
         this.companyService = companyService;
+        this.createClientMenu = new ClientSubMenu(clientService);
     }
 
     public void showMenu() {
@@ -93,7 +98,7 @@ public class RentalSubMenu {
         //Realiza o aluguel
         vehicle.setVehicleRented(true);
         Rental rental = rentalService.createRental(vehicle, client, start, finish, companyWithdrawal, companyReturn, paymentMethod);
-        System.out.println(rental);
+        System.out.println(rental.comprovanteLocacao());
 
         //}
     }
@@ -216,12 +221,20 @@ public class RentalSubMenu {
             try {
                 client = clientService.getClientById(clientId);
             } catch (ClientNotFoundException e) {
-                System.out.println("\nCliente não encontrado. Informe um CPF ou CNPJ cadastrado!");
+
+                System.out.println("Cliente não encontrado. Informe um CPF/CNPJ cadastrado.");
+                System.out.print("Escolha uma opção:1 para cadastrar, qualquer outra tecla para tentar novamente: ");
+                String option = scanner.nextLine();
+
+                if ("1".equals(option)) {
+                    createClientMenu.createClientSubMenu();
+                }
             }
 
         } while (client == null);
         return client;
     }
+
 
     public void devolverVeiculo() {
         Client client = getClient();
@@ -245,13 +258,14 @@ public class RentalSubMenu {
 
         Rental rental = rentalService.devolucaoVeiculo(client, plate);
 
-        System.out.println("\nO veículo " + rental.getVehicle().getModel() + " foi devolvido com sucesso.");
+        System.out.println("O veículo " + rental.getVehicle().getModel() + " foi devolvido com sucesso.");
+        System.out.println(rental.comprovanteDevolução());
+
     }
 }
 
 
-// 30/10/2024 13:00
-// 05/11/2024 13:00
+
 
 
 

@@ -98,7 +98,7 @@ public class Rental {
         isFinished = finished;
     }
 
-    public void comprovanteLocacao(){
+    public String comprovanteLocacao(){
         String texto= "Comprovante de Locação\n";
         texto += "----------" + "\n";
         texto += " Número do contrato: "+getId() + "\n";
@@ -109,11 +109,13 @@ public class Rental {
         texto += " Data da retirada: "+ getStart() + "\n";
         texto += " Data da devolução: " + getFinish() + "\n";
         texto += " Fatura: " + getInvoice() + "\n";
+        return texto;
+
 
     }
 
-    public void comprovanteDevolução(){
-        String texto= "Comprovante de Locação\n";
+    public String comprovanteDevolução(){
+        String texto= "Comprovante de Devolução\n";
         texto += "----------" + "\n";
         texto += " Número do contrato: "+getId() + "\n";
         texto += " Nome Cliente: "+getClient() + "\n";
@@ -123,21 +125,28 @@ public class Rental {
         texto += " Data da retirada: "+ getStart() + "\n";
         texto += " Data da devolução: " + getFinish() + "\n";
         texto += " Fatura: " + getInvoice() + "\n";
+        return texto;
 
     }
+
+
 
 
     @Override
     public String toString() {
         return "Rental{" +
-                "id=" + id +
-                ", client=" + client +
-                ", companyWithdrawal=" + companyWithdrawal +
-                ", companyReturn=" + companyReturn +
-                ", vehicle=" + vehicle +
-                ", start=" + start +
-                ", finish=" + finish +
-                ", invoice=" + invoice +
+                "id=" + id + "\n" +
+                ", client=" + client + "\n" +
+                ", companyWithdrawal=" + companyWithdrawal + "\n" +
+                ", companyReturn=" + companyReturn + "\n" +
+                ", vehicle=" + vehicle + "\n" +
+                ", start=" + start + "\n" +
+                ", finish=" + finish + "\n" +
+                ", invoice=" + invoice + "\n" +
                 '}';
     }
+
+
+
+
 }
