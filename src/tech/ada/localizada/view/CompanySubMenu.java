@@ -25,15 +25,6 @@ public class CompanySubMenu {
         int option = 0;
 
         do {
-            System.out.println("Menu:");
-            System.out.println("1 - Adicionar Empresa");
-            System.out.println("2 - Editar Empresa");
-            System.out.println("3 - Excluir Empresa");
-            System.out.println("4 - Buscar Agencia");
-            System.out.println("5 - Listar veículos da empresa");
-            System.out.println("6 - Adicionar veículo à empresa");
-            System.out.println("7 - Remover veículo da empresa");
-            System.out.println("7 - Sair");
             String options = """
                     
                     = ------------------------------------- =
@@ -41,10 +32,14 @@ public class CompanySubMenu {
                     = ------------------------------------- =
                     
                     = ------------=== Menu ===------------- =
-                    | 1 - Adicionar veículo à empresa       |
-                    | 2 - Remover veículo da empresa        |
-                    | 3 - Listar veículos da empresa        |
-                    | 4 - Sair                              |
+                    | 1 - Adicionar Agência                 |
+                    | 2 - Editar Agência                    |
+                    | 3 - Excluir Agência                   |
+                    | 4 - Buscar Agência                    |
+                    | 5 - Listar Veículos da Agência        |
+                    | 6 - Adicionar Veículo à Agência       |
+                    | 7 - Remover Veículo da Agência        |
+                    | 8 - Sair                              |
                     = ------------------------------------- =
                     """;
 
@@ -81,7 +76,7 @@ public class CompanySubMenu {
                     listVehicles();
                     break;
                 case 6:
-                    System.out.print("Informe o ID do veículo: ");
+                    System.out.print("\nInforme o ID do veículo: ");
                     int vehicleId = scanner.nextInt();
                     scanner.nextLine();
                     Vehicle vehicle = vehicleService.getVehicleById(vehicleId);
@@ -98,7 +93,7 @@ public class CompanySubMenu {
                     System.out.println("Saindo...");
                     break;
                 default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                    break;
             }
 
         } while (option != 8);
@@ -126,7 +121,7 @@ public class CompanySubMenu {
 
     public void updateComapanySubMenu() {
 
-        int opcao;
+        int option = 0;
 
         do {
             String options = """
@@ -140,16 +135,27 @@ public class CompanySubMenu {
                     | 2 - Endereço da Empresa               |
                     | 3 - Cidade da Empresa                 |
                     | 4 - CNPJ da Empresa                   |
-                    | 4 - Voltar                            |
+                    | 5 - Voltar                            |
                     = ------------------------------------- =
                     """;
 
             System.out.println(options);
             System.out.print("Escolha uma opção: ");
-            opcao = scanner.nextInt();
-            scanner.nextLine();
+            String optionString = scanner.next();
 
-            switch (opcao) {
+            try {
+                option = Integer.parseInt(optionString);
+                scanner.nextLine();
+            } catch (NumberFormatException e) {
+                System.out.println("\nError: Please enter a valid option!");
+                continue;
+            }
+
+            if (option < 1 || option > 5) {
+                System.out.println("\nError: Please enter a valid option!");
+            }
+
+            switch (option) {
                 case 1:
                     updateCompanyName(companyService);
                     break;
@@ -160,17 +166,16 @@ public class CompanySubMenu {
                     updateCompanyCity(companyService);
                     break;
                 case 4:
-                    System.out.println("\nSaindo...");
                     updateCompanyCNPJ(companyService);
                     break;
                 case 5:
-                    System.out.println("Saindo...");
+                    System.out.println("\nSaindo...");
                     break;
                 default:
                     break;
             }
 
-        } while (opcao != 5);
+        } while (option != 5);
     }
 
     public void updateCompanyName (CompanyService companyService) {
@@ -222,7 +227,7 @@ public class CompanySubMenu {
                 System.out.println("- " + vehicle.getModel() + " (" + vehicle.getPlate() + ")");
             }
         } else {
-            System.out.println("Company not found.");
+            System.out.println("\nCompany not found.");
         }
     }
 
@@ -237,9 +242,9 @@ public class CompanySubMenu {
         if (company != null) {
             company.addVehicle(vehicle);
             companyService.updateCompany(companyId, company);
-            System.out.println("VEÍCULO ADICIONADO COM SUCESSO!");
+            System.out.println("\nVEÍCULO ADICIONADO COM SUCESSO!");
         } else {
-            System.out.println("Company not found.");
+            System.out.println("\nCompany not found.");
         }
     }
 
@@ -260,18 +265,18 @@ public class CompanySubMenu {
                 company.removeVehicle(vehicleToRemove);
                 companyService.updateCompany(companyId, company);
                 vehicleService.deleteVehicle(vehicleId);
-                System.out.println("VEÍCULO REMOVIDO COM SUCESSO!");
+                System.out.println("\nVEÍCULO REMOVIDO COM SUCESSO!");
             } else {
-                System.out.println("Vehicule not found.");
+                System.out.println("\nVehicule not found.");
             }
         } else {
-            System.out.println("Company not found.");
+            System.out.println("\nCompany not found.");
         }
     }
 
     public void searchCompanyMenu() {
 
-        int opcao;
+        int option = 0;
 
         do {
             String options = """
@@ -289,10 +294,21 @@ public class CompanySubMenu {
 
             System.out.println(options);
             System.out.print("Escolha uma opção: ");
-            opcao = scanner.nextInt();
-            scanner.nextLine();
+            String optionString = scanner.next();
 
-            switch (opcao) {
+            try {
+                option = Integer.parseInt(optionString);
+                scanner.nextLine();
+            } catch (NumberFormatException e) {
+                System.out.println("\nError: Please enter a valid option!");
+                continue;
+            }
+
+            if (option < 1 || option > 4) {
+                System.out.println("\nError: Please enter a valid option!");
+            }
+
+            switch (option) {
                 case 1:
                     findCompanyName(companyService);
                     break;
@@ -303,10 +319,10 @@ public class CompanySubMenu {
                     System.out.println("Saindo...");
                     break;
                 default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                    break;
             }
 
-        } while (opcao != 3);
+        } while (option != 3);
     }
 
     public void findCompanyCNPJ (CompanyService companyService) {
@@ -321,7 +337,7 @@ public class CompanySubMenu {
         List <Company> companies = findCompaniesByNamePart(namePart, companyService);
 
         if (companies.isEmpty()) {
-            System.out.println("Nenhuma empresa encontrada com esse nome.");
+            System.out.println("\nNenhuma empresa encontrada com esse nome.");
         } else {
             System.out.println("\nEmpresas encontradas:");
             for (Company company : companies) {
@@ -350,10 +366,4 @@ public class CompanySubMenu {
         String cnpj = scanner.nextLine();
         return companyService.findCompanyByCNPJ(cnpj);
     }
-
-
-
-
-
-
 }
